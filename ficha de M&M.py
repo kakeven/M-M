@@ -1,5 +1,8 @@
+import json
+
 class Ficha:
     def __init__(self,np,nomeJogador,nomePersonagem):
+        
         self.np = np
         pontos_por_np ={
             1: 15, 2: 30, 3: 45, 4: 60, 5: 75,
@@ -107,6 +110,21 @@ class Ficha:
             self.habilidades.append(habilidade)
             print(f"Você possui: {self.pontosDisponiveis}")
 
+    def salvar(self, arquivo="ficha.json"):
+        dados = {
+            "np": self.np,
+            "nomeJogador": self.nomeJogador,
+            "nomePersonagem": self.nomePersonagem,
+            "pontosDisponiveis": self.pontosDisponiveis,
+            "total": self.total,
+            "poderes": self.poderes,
+            "habilidades": self.habilidades,
+            "pericias": self.pericias,
+            "vantagens": self.vantagens
+        }
+        with open(arquivo, "w", encoding="utf-8") as f:
+            json.dump(dados, f, indent=4, ensure_ascii=False)
+        print("Ficha salva!")
 
     def adicionarPericia(self,nomePericia,habilidade,pontosInvs):
         grad=2
@@ -145,7 +163,10 @@ class Ficha:
             print("Adicionar habilidade(2)")
             print("Adicionar vantagem (3)")
             print("Adicionar poder (4)")
-            print("Adicionar componente em um poder(5): \n")
+            print("Adicionar componente em um poder(5): ")
+            print("Verificar pontos restantes(6)")
+            print("Salvar ficha(7): ")
+            print('\n')
             opc=int(input("Selecione a opção: "))
 
             match opc:
@@ -198,6 +219,13 @@ class Ficha:
                         # adiciona o componente ao poder encontrado
                         self.adicionarComponente(nomeComponente, efeito, graduacao, custo_base, extras, falhas)
 
+                case 6:
+                    print(f"\nVocê possui {self.pontosDisponiveis} pontos disponiveis! \n")
+
+                case 7:
+                    variavel_arquivo=input("Digite o nome do arquivo: ")
+                    variavel_arquivo_feita = f"{variavel_arquivo}.json"
+                    self.salvar(arquivo=variavel_arquivo_feita)
 
 np=10
 nomePersonagem="teste"
