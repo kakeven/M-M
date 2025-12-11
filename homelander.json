@@ -1,0 +1,47 @@
+{
+    "np": 10,
+    "nomeJogador": "Kauã",
+    "nomePersonagem": "teste",
+    "pontosDisponiveis": 88,
+    "total": 150,
+    "poderes": [],
+    "habilidades": [
+        {
+            "nome": "forca",
+            "pontosGastos": 20,
+            "habilidade": 10
+        },
+        {
+            "nome": "agilidade",
+            "pontosGastos": 6,
+            "habilidade": 3
+        },
+        {
+            "nome": "presenca",
+            "pontosGastos": 2,
+            "habilidade": 1
+        },
+        {
+            "nome": "vigor",
+            "pontosGastos": 8,
+            "habilidade": 4
+        },
+        {
+            "nome": "intelecto",
+            "pontosGastos": 16,
+            "habilidade": 8
+        },
+        {
+            "nome": "luta",
+            "pontosGastos": 4,
+            "habilidade": 2
+        },
+        {
+            "nome": "prontidao",
+            "pontosGastos": 6,
+            "habilidade": 3
+        }
+    ],
+    "pericias": [],
+    "vantagens": []
+}

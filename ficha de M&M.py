@@ -19,7 +19,98 @@ class Ficha:
         self.pericias=[]
         self.vantagens=[]
 
-    def adicionarVantagem(self,nomeVantagem,graduacao):
+        self.habilidades_oficiais = [
+        "forca", "agilidade", "presenca", "vigor",
+        "intelecto", "luta", "prontidao"
+        ]
+
+        self.pericias_oficiais = [
+            "Acrobacia", "Atletismo", "Investigacao", "Percepcao",
+            "Enganacao", "Furtividade", "Tecnologia", "Intuicao",
+            "Pilotagem", "Veiculos", "Medicina", "Diplomacia"
+        ]
+
+        self.vantagens_oficiais = [
+            "acao em movimento",
+            "agarrar aprimorado",
+            "agarrar preciso",
+            "agarrar rapido",
+            "ambiente favorito",
+            "arma improvisada",
+            "armacao",
+            "artifice",
+            "assustar",
+            "ataque acurado",
+            "ataque a distancia",
+            "ataque corpo a corpo",
+            "ataque defensivo",
+            "ataque domino",
+            "ataque imprudente",
+            "ataque poderoso",
+            "ataque preciso",
+            "atraente",
+            "avaliacao",
+            "bem informado",
+            "bem relacionado",
+            "beneficio",
+            "capanga",
+            "contatos",
+            "critico aprimorado",
+            "de pe",
+            "defesa aprimorada",
+            "derrubar aprimorado",
+            "desarmar aprimorado",
+            "destemido",
+            "duro de matar",
+            "empatia com animais",
+            "equipamento",
+            "esconder se a plenas vista",
+            "esforco extraordinario",
+            "esforco supremo",
+            "esquiva fabulosa",
+            "estrangular",
+            "evasao",
+            "fascinar",
+            "faz tudo",
+            "ferramentas aprimoradas",
+            "finta agil",
+            "idiomas",
+            "imobilizar aprimorado",
+            "iniciativa aprimorada",
+            "inimigo favorito",
+            "inspirar",
+            "interpor se",
+            "inventor",
+            "lideranca",
+            "luta no chao",
+            "maestria em arremesso",
+            "maestria em pericia",
+            "memoria eidetica",
+            "mira aprimorada",
+            "parceiro",
+            "prender arma",
+            "quebrar aprimorado",
+            "quebrar arma",
+            "rastrear",
+            "redirecionar",
+            "ritualista",
+            "rolamento defensivo",
+            "saque rapido",
+            "segunda chance",
+            "sorte",
+            "sorte de principiante",
+            "tolerancia maior",
+            "tomar a iniciativa",
+            "tontear",
+            "trabalho em equipe",
+            "transe",
+            "zombar"
+        ]
+
+    def validar_tudo(self,nome,categoria):
+        return nome in categoria
+
+    def adicionarVantagem(self,nomeVantagem,graduacao):        
         custo_graduacao = 1
         custo_total = graduacao * custo_graduacao
         
@@ -84,7 +175,6 @@ class Ficha:
             "nome":nomePoder,
             "componentes": []
         }
-        
         self.poderes.append(poder)
 
     def adicionarHabilidades(self,nomeHabilidade,gra):
@@ -126,6 +216,20 @@ class Ficha:
             json.dump(dados, f, indent=4, ensure_ascii=False)
         print("Ficha salva!")
 
+
+    @staticmethod
+    def carregar_ficha(caminho):
+        with open(caminho, "r", encoding="utf-8") as f:
+            dados = json.load(f)
+
+        ficha = Ficha(nomeJogador=dados["nomeJogador"],np=dados["np"],nomePersonagem=dados["nomePersonagem"])  # cria ficha vazia
+
+        # joga tudo do JSON dentro da ficha
+        for chave, valor in dados.items():
+            setattr(ficha, chave, valor)
+
+        return ficha
+
     def adicionarPericia(self,nomePericia,habilidade,pontosInvs):
         grad=2
         maxgrad= self.np + 10
@@ -155,38 +259,47 @@ class Ficha:
         print(f"Graduações: {graduacoes}, Bônus total: {bonus}, Custo: {pontosInvs}")
         print(f"Pontos restantes: {self.pontosDisponiveis}\n")
 
-
-    def fazerFicha(self,):
+    def fazerFicha(self):
         
         while(1):
             print("\nadicionar pericia (1)")
             print("Adicionar habilidade(2)")
             print("Adicionar vantagem (3)")
             print("Adicionar poder (4)")
-            print("Adicionar componente em um poder(5): ")
+            print("Adicionar componente em um poder(5) ")
             print("Verificar pontos restantes(6)")
-            print("Salvar ficha(7): ")
+            print("Salvar ficha(7) ")
+            print("Sair (0)")
             print('\n')
             opc=int(input("Selecione a opção: "))
 
             match opc:
                 case 1:
                     nomePericia=input("Nome da pericia: ")
-                    habilidade=int(input("Digite o bonus da habilidade correspondente. Ex: forca 4, digite 4: "))
-                    pontosInvestidos = int(input("Digite quantos pontos vai investir na pericia: \n"))
-                    ficha.adicionarPericia(nomePericia=nomePericia,habilidade=habilidade,pontosInvs=pontosInvestidos)
-
+                    if(self.validar_tudo(nomePericia,self.pericias_oficiais)):
+                        habilidade=int(input("Digite o bonus da habilidade correspondente. Ex: forca 4, digite 4: "))
+                        pontosInvestidos = int(input("Digite quantos pontos vai investir na pericia: \n"))
+                        ficha.adicionarPericia(nomePericia=nomePericia,habilidade=habilidade,pontosInvs=pontosInvestidos)
+                    else:
+                        print("Pericia invalida!")
                 case 2:
-                    print("Habilidades se referem aos famosos atributos, inteligencia, agilidade, etc. Cada graduação é 2 pontos, então força 1 custa 2 pontos de poder\n")
+                    print("Habilidades são forca, agilidade, presenca, vigor, intelecto, luta, prontidao. Cada graduação é 2 pontos, então força 1 custa 2 pontos de poder\n")
                     nomeHabilidade=input("Nome da habilidade: ")
-                    pontosInvestidos=int(input("digite quantas graduações vai investir na habilidade: \n"))
-                    ficha.adicionarHabilidades(nomeHabilidade=nomeHabilidade,gra=pontosInvestidos)
-                
+                    if(self.validar_tudo(nomeHabilidade,self.habilidades_oficiais)):
+                        pontosInvestidos=int(input("digite quantas graduações vai investir na habilidade: \n"))
+                        ficha.adicionarHabilidades(nomeHabilidade=nomeHabilidade,gra=pontosInvestidos)
+                    else:
+                        print("\nHabilidade invalida!")
+
                 case 3:
-                    print("Vantagens são normalmente compras unicas,então apenas é necessário 1 ponto, porém algumas podem ter nivel, atente-se!\n")
+                    print("Vantagens são normalmente compras únicas,então apenas é necessário 1 ponto, porém algumas podem ter nivel, atente-se!\n")
                     nomeVantagem=input("Digite o nome da vantagem: ")
-                    pontosInvestidos=int(input("Digite quantos pontos vai investir: \n"))
-                    ficha.adicionarVantagem(nomeVantagem=nomeVantagem,graduacao=pontosInvestidos)
+                    if(self.validar_tudo(nomeVantagem,self.vantagens_oficiais)):
+                        pontosInvestidos=int(input("Digite quantos pontos vai investir: \n"))
+                        ficha.adicionarVantagem(nomeVantagem=nomeVantagem,graduacao=pontosInvestidos)
+                    else:
+                        print("\nVantagem invalida!")
+                        
 
                 case 4:
                     print("Em M&M, o poder é criado por seus componetes, entao nessa primeira parte se refere ao nome do conjunto. Ex: raio laser")
@@ -227,9 +340,33 @@ class Ficha:
                     variavel_arquivo_feita = f"{variavel_arquivo}.json"
                     self.salvar(arquivo=variavel_arquivo_feita)
 
+                case 0:
+                    return
+
+    def menu(self):
+        while(1):
+            print("Fazer ficha (1): ")
+            print("Carregar ficha (2)")
+            print("mensagem misteriosa (3)")
+            
+            opc = int(input("Escolhe ai: "))
+            match opc:
+                case 1:
+                    ficha=Ficha()
+                    ficha.fazerFicha()
+                case 2:
+                    caminho=input("Digite o nome da fica,tal qual, Não coloque o .json")
+                    caminho_feito=f"{caminho}.json"
+                    ficha=Ficha.carregar_ficha(caminho=caminho_feito)
+                    print("Ficha carregada")
+                    ficha.fazerFicha()
+
+
+
+
 np=10
 nomePersonagem="teste"
 nomeJogador="Kauã"
 ficha=Ficha(np=np,nomePersonagem=nomePersonagem,nomeJogador=nomeJogador)
 
-ficha.fazerFicha()
+ficha.menu()
