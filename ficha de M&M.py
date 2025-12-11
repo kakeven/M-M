@@ -352,7 +352,7 @@ class Ficha:
             opc = int(input("Escolhe ai: "))
             match opc:
                 case 1:
-                    ficha=Ficha()
+                    ficha=Ficha(np=10,nomeJogador="kksnd",nomePersonagem="kandh")
                     ficha.fazerFicha()
                 case 2:
                     caminho=input("Digite o nome da fica,tal qual, Não coloque o .json")
