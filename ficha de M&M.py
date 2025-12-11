@@ -81,26 +81,6 @@ class Ficha:
             "nome":nomePoder,
             "componentes": []
         }
-        self.poderes.append(poder)
-        # print("\nPara construir o poder, você deve ter o nome do componente,o efeito, graduação,custo base, e se houver extras e falhas\n")
-        
-        # nomeComponente=input("digite o nome do componente: ")
-        # efeito=input("Digite o nome do efeito: ")
-        # graduacao=int(input("Digite a graduacao(é numero): "))
-        # custo_base=int(input("Digite o custo base: "))
-        # escolha=int(input("vai ter falhas ou extras? 0(nao) ou 1(sim): "))
-        # extras=[]
-        # falhas=[]
-        
-        # if escolha==1:
-        #     print("as falhas e extras se baseiam em uma lista, entao digite por exemplo [+1,+1,-2,+1]")
-        #     falhas = input("Digite a lista de falhas: ")
-        #     extras = input("Digite a lista de extras")
-        #     extras = list(map(int, extras.strip("[]").split(",")))
-        #     falhas = list(map(int, falhas.strip("[]").split(",")))
-            
-        #     self.adicionarComponente(nomeComponente,efeito,graduacao,custo_base)
-
         
         self.poderes.append(poder)
 
