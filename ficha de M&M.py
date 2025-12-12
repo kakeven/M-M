@@ -25,9 +25,9 @@ class Ficha:
         ]
 
         self.pericias_oficiais = [
-            "Acrobacia", "Atletismo", "Investigacao", "Percepcao",
-            "Enganacao", "Furtividade", "Tecnologia", "Intuicao",
-            "Pilotagem", "Veiculos", "Medicina", "Diplomacia"
+            "acrobacia", "atletismo", "investigacao", "percepcao",
+            "enganacao", "furtividade", "tecnologia", "intuicao",
+            "pilotagem", "veiculos", "medicina", "diplomacia"
         ]
 
         self.vantagens_oficiais = [
