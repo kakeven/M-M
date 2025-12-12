@@ -21,7 +21,7 @@ class Ficha:
 
         self.habilidades_oficiais = [
         "forca", "agilidade", "presenca", "vigor",
-        "intelecto", "luta", "prontidao"
+        "intelecto", "luta", "prontidao","destreza"
         ]
 
         self.pericias_oficiais = [
@@ -176,6 +176,7 @@ class Ficha:
             "componentes": []
         }
         self.poderes.append(poder)
+        print("poder adicionado")
 
     def adicionarHabilidades(self,nomeHabilidade,gra):
         custo_graduacao = 2
@@ -279,15 +280,15 @@ class Ficha:
                     if(self.validar_tudo(nomePericia,self.pericias_oficiais)):
                         habilidade=int(input("Digite o bonus da habilidade correspondente. Ex: forca 4, digite 4: "))
                         pontosInvestidos = int(input("Digite quantos pontos vai investir na pericia: \n"))
-                        ficha.adicionarPericia(nomePericia=nomePericia,habilidade=habilidade,pontosInvs=pontosInvestidos)
+                        self.adicionarPericia(nomePericia=nomePericia,habilidade=habilidade,pontosInvs=pontosInvestidos)
                     else:
                         print("Pericia invalida!")
                 case 2:
-                    print("Habilidades são forca, agilidade, presenca, vigor, intelecto, luta, prontidao. Cada graduação é 2 pontos, então força 1 custa 2 pontos de poder\n")
+                    print("Habilidades são forca, agilidade, presenca, vigor, intelecto, luta, prontidao e destreza. Cada graduação é 2 pontos, então força 1 custa 2 pontos de poder\n")
                     nomeHabilidade=input("Nome da habilidade: ")
                     if(self.validar_tudo(nomeHabilidade,self.habilidades_oficiais)):
                         pontosInvestidos=int(input("digite quantas graduações vai investir na habilidade: \n"))
-                        ficha.adicionarHabilidades(nomeHabilidade=nomeHabilidade,gra=pontosInvestidos)
+                        self.adicionarHabilidades(nomeHabilidade=nomeHabilidade,gra=pontosInvestidos)
                     else:
                         print("\nHabilidade invalida!")
 
@@ -296,7 +297,7 @@ class Ficha:
                     nomeVantagem=input("Digite o nome da vantagem: ")
                     if(self.validar_tudo(nomeVantagem,self.vantagens_oficiais)):
                         pontosInvestidos=int(input("Digite quantos pontos vai investir: \n"))
-                        ficha.adicionarVantagem(nomeVantagem=nomeVantagem,graduacao=pontosInvestidos)
+                        self.adicionarVantagem(nomeVantagem=nomeVantagem,graduacao=pontosInvestidos)
                     else:
                         print("\nVantagem invalida!")
                         
@@ -304,33 +305,103 @@ class Ficha:
                 case 4:
                     print("Em M&M, o poder é criado por seus componetes, entao nessa primeira parte se refere ao nome do conjunto. Ex: raio laser")
                     nomePoder=input("Digite o nome do poder: ")
-                    ficha.adicionarPoder(nomePoder=nomePoder)
+                    self.adicionarPoder(nomePoder=nomePoder)
 
+                
                 case 5:
-                    nomePoder = input("Digite o nome do poder que deseja adicionar o componente: ")
-                    # procura o poder pelo nome
+                    if not self.poderes:
+                        print("Nenhum poder criado. Primeiro adicione um poder (opção 4).")
+                        break
+
+                    print("\nPoderes existentes:")
+                    for i, p in enumerate(self.poderes):
+                        print(f"{i+1} - {p['nome']}")
+
+                    escolha = input("\nDigite o número do poder ou pressione ENTER para digitar o nome: ")
+
                     poder_encontrado = None
-                    for poder in self.poderes:
-                        if poder["nome"] == nomePoder:
-                            poder_encontrado = poder
+
+                    # Escolha por número (seguro)
+                    if escolha.isdigit():
+                        indice = int(escolha) - 1
+                        if 0 <= indice < len(self.poderes):
+                            poder_encontrado = self.poderes[indice]
+                        else:
+                            print("Número inválido!")
                             break
-                    if not poder_encontrado:
-                        print("Poder não encontrado!")
+
+                    # Escolha por nome (fallback)
                     else:
-                        # pedir info do componente
-                        nomeComponente = input("Digite o nome do componente: ")
-                        efeito = input("Digite o efeito: ")
-                        graduacao = int(input("Digite a graduação: "))
-                        custo_base = int(input("Digite o custo base: "))
-                        escolha = input("Vai ter falhas ou extras? 0(não) / 1(sim): ")
+                        nomePoder = escolha.strip().lower()
+                        for poder in self.poderes:
+                            if poder["nome"].lower() == nomePoder:
+                                poder_encontrado = poder
+                                break
+                        if not poder_encontrado:
+                            print("Poder não encontrado!")
+                            break
 
-                        extras, falhas = [], []
-                        if escolha == "1":
-                            falhas = list(map(int, input("Digite a lista de falhas: ").strip("[]").split(",")))
-                            extras = list(map(int, input("Digite a lista de extras: ").strip("[]").split(",")))
+                    # Agora coleta os dados do componente
+                    nomeComponente = input("Nome do componente: ")
+                    efeito = input("Efeito: ")
+                    graduacao = int(input("Graduação: "))
+                    custo_base = int(input("Custo base: "))
+                    escolha_mod = input("Vai ter falhas ou extras? 0(não) / 1(sim): ")
 
-                        # adiciona o componente ao poder encontrado
-                        self.adicionarComponente(nomeComponente, efeito, graduacao, custo_base, extras, falhas)
+                    extras, falhas = [], []
+                    if escolha_mod == "1":
+                        falhas_str = input("Digite a lista de falhas (ex: -1,-1 ou []): ").strip("[] ")
+                        extras_str = input("Digite a lista de extras (ex: +1,+1 ou []): ").strip("[] ")
+
+                        if falhas_str:
+                            falhas = list(map(int, falhas_str.split(",")))
+                        if extras_str:
+                            extras = list(map(int, extras_str.split(",")))
+
+                    # Adiciona de fato o componente no poder encontrado
+                    poder_encontrado["componentes"].append({
+                        "nome": nomeComponente,
+                        "efeito": efeito,
+                        "graduacao": graduacao,
+                        "custo_base": custo_base,
+                        "extras": extras,
+                        "falhas": falhas,
+                        "custo_total": (custo_base + sum(extras) - sum(falhas)) * graduacao
+                    })
+
+                    self.pontosDisponiveis -= (custo_base + sum(extras) - sum(falhas)) * graduacao
+
+                    print(f"\nComponente '{nomeComponente}' adicionado ao poder '{poder_encontrado['nome']}'!")
+                    print(f"Pontos restantes: {self.pontosDisponiveis}\n")
+                
+                
+                
+                
+                # case 5:
+                #     nomePoder = input("Digite o nome do poder que deseja adicionar o componente: ")
+                #     # procura o poder pelo nome
+                #     poder_encontrado = None
+                #     for poder in self.poderes:
+                #         if poder["nome"].lower() == nomePoder.lower():
+                #             poder_encontrado = poder
+                #             break
+                #     if not poder_encontrado:
+                #         print("Poder não encontrado!")
+                #     else:
+                #         # pedir info do componente
+                #         nomeComponente = input("Digite o nome do componente: ")
+                #         efeito = input("Digite o efeito: ")
+                #         graduacao = int(input("Digite a graduação: "))
+                #         custo_base = int(input("Digite o custo base: "))
+                #         escolha = input("Vai ter falhas ou extras? 0(não) / 1(sim): ")
+
+                #         extras, falhas = [], []
+                #         if escolha == "1":
+                #             falhas = list(map(int, input("Digite a lista de falhas: ").strip("[]").split(",")))
+                #             extras = list(map(int, input("Digite a lista de extras: ").strip("[]").split(",")))
+
+                #         # adiciona o componente ao poder encontrado
+                #         self.adicionarComponente(nomeComponente, efeito, graduacao, custo_base, extras, falhas)
 
                 case 6:
                     print(f"\nVocê possui {self.pontosDisponiveis} pontos disponiveis! \n")
@@ -352,10 +423,9 @@ class Ficha:
             opc = int(input("Escolhe ai: "))
             match opc:
                 case 1:
-                    ficha=Ficha(np=10,nomeJogador="kksnd",nomePersonagem="kandh")
-                    ficha.fazerFicha()
+                    self.fazerFicha()
                 case 2:
-                    caminho=input("Digite o nome da fica,tal qual, Não coloque o .json")
+                    caminho=input("Digite o nome da fica,tal qual, Não coloque o .json: ")
                     caminho_feito=f"{caminho}.json"
                     ficha=Ficha.carregar_ficha(caminho=caminho_feito)
                     print("Ficha carregada")

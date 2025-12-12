@@ -2,19 +2,118 @@
     "np": 10,
     "nomeJogador": "Kauã",
     "nomePersonagem": "teste",
-    "pontosDisponiveis": 88,
+    "pontosDisponiveis": 20,
     "total": 150,
-    "poderes": [],
+    "poderes": [
+        {
+            "nome": "Composto K",
+            "componentes": [
+                {
+                    "nome": "forca",
+                    "efeito": "geral",
+                    "graduacao": 10,
+                    "custo_base": 2,
+                    "extras": [],
+                    "falhas": [],
+                    "custo_total": 20
+                },
+                {
+                    "nome": "voo",
+                    "efeito": "movimento",
+                    "graduacao": 9,
+                    "custo_base": 2,
+                    "extras": [],
+                    "falhas": [],
+                    "custo_total": 18
+                },
+                {
+                    "nome": "vigor",
+                    "efeito": "geral",
+                    "graduacao": 7,
+                    "custo_base": 2,
+                    "extras": [],
+                    "falhas": [],
+                    "custo_total": 14
+                },
+                {
+                    "nome": "agilidade",
+                    "efeito": "geral",
+                    "graduacao": 4,
+                    "custo_base": 2,
+                    "extras": [],
+                    "falhas": [],
+                    "custo_total": 8
+                },
+                {
+                    "nome": "Sentidos",
+                    "efeito": "sensorial",
+                    "graduacao": 5,
+                    "custo_base": 1,
+                    "extras": [],
+                    "falhas": [],
+                    "custo_total": 5
+                },
+                {
+                    "nome": "velocidade",
+                    "efeito": "movimento",
+                    "graduacao": 2,
+                    "custo_base": 1,
+                    "extras": [],
+                    "falhas": [],
+                    "custo_total": 2
+                }
+            ]
+        },
+        {
+            "nome": "raio laser",
+            "componentes": [
+                {
+                    "nome": "dano",
+                    "efeito": "dano",
+                    "graduacao": 4,
+                    "custo_base": 1,
+                    "extras": [],
+                    "falhas": [],
+                    "custo_total": 4
+                },
+                {
+                    "nome": "Alcance",
+                    "efeito": "alcance",
+                    "graduacao": 2,
+                    "custo_base": 1,
+                    "extras": [
+                        4
+                    ],
+                    "falhas": [],
+                    "custo_total": 10
+                }
+            ]
+        },
+        {
+            "nome": "imunidade",
+            "componentes": [
+                {
+                    "nome": "imunidade",
+                    "efeito": "defesa",
+                    "graduacao": 10,
+                    "custo_base": 1,
+                    "extras": [],
+                    "falhas": [],
+                    "custo_total": 10
+                }
+            ]
+        }
+    ],
     "habilidades": [
         {
             "nome": "forca",
-            "pontosGastos": 20,
-            "habilidade": 10
+            "pontosGastos": 0,
+            "habilidade": 0
         },
         {
             "nome": "agilidade",
-            "pontosGastos": 6,
-            "habilidade": 3
+            "pontosGastos": 0,
+            "habilidade": 0
         },
         {
             "nome": "presenca",
@@ -23,8 +122,8 @@
         },
         {
             "nome": "vigor",
-            "pontosGastos": 8,
-            "habilidade": 4
+            "pontosGastos": 0,
+            "habilidade": 0
         },
         {
             "nome": "intelecto",
@@ -33,15 +132,59 @@
         },
         {
             "nome": "luta",
-            "pontosGastos": 4,
-            "habilidade": 2
+            "pontosGastos": 2,
+            "habilidade": 1
         },
         {
             "nome": "prontidao",
-            "pontosGastos": 6,
-            "habilidade": 3
+            "pontosGastos": 2,
+            "habilidade": 1
+        },
+        {
+            "nome": "destreza",
+            "pontosGastos": 2,
+            "habilidade": 1
         }
     ],
-    "pericias": [],
-    "vantagens": []
+    "pericias": [
+        {
+            "nome": "tecnologia",
+            "graduação": 4,
+            "bonus": 12,
+            "custo": 2
+        },
+        {
+            "nome": "veiculos",
+            "graduação": 2,
+            "bonus": 3,
+            "custo": 1
+        }
+    ],
+    "vantagens": [
+        {
+            "nome": "faz tudo",
+            "graduacao": 1,
+            "pontos gastos": 1
+        },
+        {
+            "nome": "idiomas",
+            "graduacao": 3,
+            "pontos gastos": 3
+        },
+        {
+            "nome": "bem relacionado",
+            "graduacao": 1,
+            "pontos gastos": 1
+        },
+        {
+            "nome": "beneficio",
+            "graduacao": 6,
+            "pontos gastos": 6
+        },
+        {
+            "nome": "destemido",
+            "graduacao": 1,
+            "pontos gastos": 1
+        }
+    ]
 }
