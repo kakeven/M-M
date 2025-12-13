@@ -2,7 +2,7 @@
     "np": 10,
     "nomeJogador": "Kauã",
     "nomePersonagem": "teste",
-    "pontosDisponiveis": 20,
+    "pontosDisponiveis": 16,
     "total": 150,
     "poderes": [
         {
@@ -61,6 +61,15 @@
                     "extras": [],
                     "falhas": [],
                     "custo_total": 2
+                },
+                {
+                    "nome": "fator de cura",
+                    "efeito": "Regeneração",
+                    "graduacao": 4,
+                    "custo_base": 1,
+                    "extras": [],
+                    "falhas": [],
+                    "custo_total": 4
                 }
             ]
         },
