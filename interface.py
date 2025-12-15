@@ -1,6 +1,4 @@
-import json
-from poderes import efeitos_poderes_dicionario,efeitos_poderes_lista,vantagens
-from ficha import *
+from ficha import Ficha
 from armazenamento import carregar_ficha
 
 def menu():

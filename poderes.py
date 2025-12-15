@@ -320,79 +320,97 @@ efeitos_poderes_lista = [
 
 vantagens = [  
 
-            "acao em movimento",
-            "agarrar aprimorado",
-            "agarrar preciso",
-            "agarrar rapido",
-            "ambiente favorito",
-            "arma improvisada",
-            "armacao",
-            "artifice",
-            "assustar",
-            "ataque acurado",
-            "ataque a distancia",
-            "ataque corpo a corpo",
-            "ataque defensivo",
-            "ataque domino",
-            "ataque imprudente",
-            "ataque poderoso",
-            "ataque preciso",
-            "atraente",
-            "avaliacao",
-            "bem informado",
-            "bem relacionado",
-            "beneficio",
-            "capanga",
-            "contatos",
-            "critico aprimorado",
-            "de pe",
-            "defesa aprimorada",
-            "derrubar aprimorado",
-            "desarmar aprimorado",
-            "destemido",
-            "duro de matar",
-            "empatia com animais",
-            "equipamento",
-            "esconder se a plenas vista",
-            "esforco extraordinario",
-            "esforco supremo",
-            "esquiva fabulosa",
-            "estrangular",
-            "evasao",
-            "fascinar",
-            "faz tudo",
-            "ferramentas aprimoradas",
-            "finta agil",
-            "idiomas",
-            "imobilizar aprimorado",
-            "iniciativa aprimorada",
-            "inimigo favorito",
-            "inspirar",
-            "interpor se",
-            "inventor",
-            "lideranca",
-            "luta no chao",
-            "maestria em arremesso",
-            "maestria em pericia",
-            "memoria eidetica",
-            "mira aprimorada",
-            "parceiro",
-            "prender arma",
-            "quebrar aprimorado",
-            "quebrar arma",
-            "rastrear",
-            "redirecionar",
-            "ritualista",
-            "rolamento defensivo",
-            "saque rapido",
-            "segunda chance",
-            "sorte",
-            "sorte de principiante",
-            "tolerancia maior",
-            "tomar a iniciativa",
-            "tontear",
-            "trabalho em equipe",
-            "transe",
-            "zombar"
+            "acao em movimento",#
+            "agarrar aprimorado",#
+            "agarrar preciso",#
+            "agarrar rapido",#
+            "ambiente favorito",#
+            "arma improvisada",#
+            "armacao",#
+            "artifice",#
+            "assustar",#
+            "ataque acurado",#
+            "ataque a distancia",#
+            "ataque corpo a corpo",#
+            "ataque defensivo",#
+            "ataque domino",#
+            "ataque imprudente",#
+            "ataque poderoso",#
+            "ataque preciso",#
+            "atraente",#
+            "avaliacao",#
+            "bem informado",#
+            "bem relacionado",#
+            "beneficio",#
+            "capanga",#
+            "contatos",#
+            "critico aprimorado",#
+            "de pe",#
+            "defesa aprimorada",#
+            "derrubar aprimorado",#
+            "desarmar aprimorado",#
+            "destemido",#
+            "duro de matar",#
+            "empatia com animais",#
+            "equipamento",#
+            "esconder se a plenas vista",#
+            "esforco extraordinario",#
+            "esforco supremo",#
+            "esquiva fabulosa",#
+            "estrangular",#
+            "evasao",#
+            "fascinar",#
+            "faz tudo",#
+            "ferramentas aprimoradas",#
+            "finta agil",#
+            "idiomas",#
+            "imobilizar aprimorado",#
+            "iniciativa aprimorada",#
+            "inimigo favorito",#
+            "inspirar",#
+            "interpor se",#
+            "inventor",#
+            "lideranca",#
+            "luta no chao",#
+            "maestria em arremesso",#
+            "maestria em pericia",#
+            "memoria eidetica",#
+            "mira aprimorada",#
+            "parceiro",#
+            "prender arma",#
+            "quebrar aprimorado",#
+            "quebrar arma",#
+            "rastrear",#
+            "redirecionar",#
+            "ritualista",#
+            "rolamento defensivo",#
+            "saque rapido",#
+            "segunda chance",#
+            "sorte",#
+            "sorte de principiante",#
+            "tolerancia maior",#
+            "tomar a iniciativa",#
+            "tontear",#
+            "trabalho em equipe",#
+            "transe",#
+            "zombar"#
         ]
-pass
+
+pericias_por_habilidade = {
+    "acrobacia": "agilidade",
+    "atletismo": "forca",
+    "combateadistancia": "destreza",
+    "combatecorpoacorpo": "luta",
+    "enganacao": "presenca",
+    "especialidade": "intelecto",
+    "furtividade": "agilidade",
+    "intimidacao": "presenca",
+    "intuicao": "prontidao",
+    "investigacao": "intelecto",
+    "percepcao": "prontidao",
+    "persuasao": "presenca",
+    "prestidigitacao": "destreza",
+    "tecnologia": "intelecto",
+    "tratamento": "intelecto",
+    "veiculos": "destreza"
+}

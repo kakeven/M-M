@@ -1,5 +1,5 @@
 import json
-from poderes import efeitos_poderes_dicionario,efeitos_poderes_lista,vantagens
+from poderes import efeitos_poderes_dicionario,efeitos_poderes_lista,vantagens,pericias_por_habilidade
 from ficha_utilitarios import simplificar_pericia, simplificar_habilidade, simplificar_vantagem, simplificar_componente
 
 class Ficha:
@@ -13,7 +13,16 @@ class Ficha:
         self.nomePersonagem=nomePersonagem
 
         self.poderes=[]
-        self.habilidades=[]
+        self.habilidades={
+            "forca": 0,
+            "agilidade": 0,
+            "destreza": 0,
+            "luta": 0,
+            "intelecto": 0,
+            "prontidao": 0,
+            "presenca": 0,
+            "vigor":0
+        }
         self.pericias=[]
         self.vantagens=[]
         self.poderes_lista= efeitos_poderes_lista
@@ -25,9 +34,9 @@ class Ficha:
         ]
 
         self.pericias_oficiais = [
-            "acrobacia", "atletismo", "investigacao", "percepcao",
-            "enganacao", "furtividade", "tecnologia", "intuicao",
-            "pilotagem", "veiculos", "medicina", "diplomacia"
+            "acrobacia", "atletismo","combate a distancia","combate a corpo-a-corpo","enganacao","especialidade",
+            "furtividade","intimidacao", "intuicao","investigacao", "percepcao","persuasao","prestidigitacao", 
+            "tecnologia","tratamento","veiculos" 
         ]
 
         self.vantagens_oficiais = vantagens
@@ -104,11 +113,6 @@ class Ficha:
         custo_graduacao = 2
         custo_total = custo_graduacao * gra
         
-        #vericação para nao ter duplicata
-        for h in self.habilidades:
-            if h["nome"] == nomeHabilidade:
-                print("Essa habilidade já foi adicionada.")
-                return
         
         if custo_total> self.pontosDisponiveis:
             print(f"Pontos excedentes, você possui: {self.pontosDisponiveis} e quer gastar:{custo_total}")
@@ -120,7 +124,14 @@ class Ficha:
                 "pontosGastos":custo_total,
                 "habilidade": gra
             }
-            self.habilidades.append(habilidade)
+            self.habilidades[nomeHabilidade] += gra
+
+            #Re calcular pericia
+
+            for p in self.pericias:
+                habilidade_base = pericias_por_habilidade[p["nome"]]
+                if habilidade_base == nomeHabilidade:
+                    p["bonus"] = p["graduação"] + self.habilidades[nomeHabilidade]
             print(f"Você possui: {self.pontosDisponiveis}")
 
     def adicionarPericia(self,nomePericia,habilidade,pontosInvs):

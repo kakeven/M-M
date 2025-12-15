@@ -43,19 +43,18 @@ def escolher_da_lista(lista):
         print("Número fora do intervalo.")
         return None
 
-def simplificar_pericia(ficha):
-    listar_atributos(ficha.pericias_oficiais)             
-    nomePericia=input("Nome da pericia: ")
+def simplificar_pericia(ficha):   
+    nomePericia=escolher_da_lista(ficha.pericias_oficiais)
     if(validar_tudo(nomePericia,ficha.pericias_oficiais)):
-        habilidade=int(input("Digite o bonus da habilidade correspondente. Ex: forca 4, digite 4: "))
+        habilidade=ver_pericia(ficha,nomePericia)
         pontosInvestidos = int(input("Digite quantos pontos vai investir na pericia: \n"))
         ficha.adicionarPericia(nomePericia=nomePericia,habilidade=habilidade,pontosInvs=pontosInvestidos)
     else:
         print("Pericia invalida!")
 
 def simplificar_habilidade(ficha):             
-    listar_atributos(ficha.habilidades_oficiais)
-    nomeHabilidade=input("Nome da habilidade: ")
+    
+    nomeHabilidade=escolher_da_lista(ficha.habilidades_oficiais)
     if(validar_tudo(nomeHabilidade,ficha.habilidades_oficiais)):
         pontosInvestidos=int(input("digite quantas graduações vai investir na habilidade: \n"))
         ficha.adicionarHabilidades(nomeHabilidade=nomeHabilidade,gra=pontosInvestidos)
@@ -64,8 +63,7 @@ def simplificar_habilidade(ficha):
 
 def simplificar_vantagem(ficha):
     print("Vantagens são normalmente compras únicas,então apenas é necessário 1 ponto, porém algumas podem ter nivel, atente-se!\n")
-    listar_atributos(ficha.vantagens_oficiais)
-    nomeVantagem=input("Digite o nome da vantagem: ")
+    nomeVantagem=escolher_da_lista(ficha.vantagens_oficiais)
     if(validar_tudo(nomeVantagem,ficha.vantagens_oficiais)):
         pontosInvestidos=int(input("Digite quantos pontos vai investir: \n"))
         ficha.adicionarVantagem(nomeVantagem=nomeVantagem,graduacao=pontosInvestidos)
@@ -129,3 +127,8 @@ def simplificar_componente(ficha):
 
         print(f"\nComponente '{nomeComponente}' adicionado ao poder '{poder_encontrado['nome']}'!")
         print(f"Pontos restantes: {ficha.pontosDisponiveis}\n") 
+
+def ver_pericia(ficha,nomePericia):
+    return  ficha.habilidades.get(
+        pericias_por_habilidade[nomePericia],0
+    )

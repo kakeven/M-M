@@ -1,11 +1,27 @@
 {
-    "np": 2,
-    "nomeJogador": "powdad",
-    "nomePersonagem": "fgoaiuda",
-    "pontosDisponiveis": 30,
-    "total": 30,
+    "np": 10,
+    "nomeJogador": "",
+    "nomePersonagem": "",
+    "pontosDisponiveis": 120,
+    "total": 150,
     "poderes": [],
-    "habilidades": [],
-    "pericias": [],
+    "habilidades": {
+        "forca": 0,
+        "agilidade": 10,
+        "destreza": 0,
+        "luta": 0,
+        "intelecto": 0,
+        "prontidao": 0,
+        "presenca": 0,
+        "vigor": 0
+    },
+    "pericias": [
+        {
+            "nome": "acrobacia",
+            "graduação": 20,
+            "bonus": 20,
+            "custo": 10
+        }
+    ],
     "vantagens": []
 }
