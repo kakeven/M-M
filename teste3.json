@@ -1,0 +1,35 @@
+{
+    "np": 1,
+    "nomeJogador": "tsdawd",
+    "nomePersonagem": "dawdawvbtr",
+    "pontosDisponiveis": 13,
+    "total": 15,
+    "poderes": [
+        {
+            "nome": "teste",
+            "componentes": [
+                {
+                    "nome": "voo",
+                    "efeito": "Voo",
+                    "graduacao": 1,
+                    "custo_base": 2,
+                    "extras": {},
+                    "falhas": {},
+                    "custo_total": 2
+                }
+            ]
+        }
+    ],
+    "habilidades": {
+        "forca": 0,
+        "agilidade": 0,
+        "destreza": 0,
+        "luta": 0,
+        "intelecto": 0,
+        "prontidao": 0,
+        "presenca": 0,
+        "vigor": 0
+    },
+    "pericias": [],
+    "vantagens": []
+}

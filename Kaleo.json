@@ -2,7 +2,7 @@
     "np": 10,
     "nomeJogador": "Kauã",
     "nomePersonagem": "Kaleo",
-    "pontosDisponiveis": 20,
+    "pontosDisponiveis": 24,
     "total": 150,
     "poderes": [
         {
@@ -89,7 +89,10 @@
                     "falhas": {},
                     "custo_total": 10
                 }
-            ]
+            ],
+            "falhas": {
+                "removivel": 1
+            }
         }
     ],
     "habilidades": {

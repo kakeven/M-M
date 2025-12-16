@@ -1,7 +1,7 @@
 import json
 from poderes import efeitos_poderes_dicionario,efeitos_poderes_lista,vantagens,pericias_por_habilidade,extras_dict
 from ficha_utilitarios import( simplificar_pericia, simplificar_habilidade,
-simplificar_vantagem, simplificar_componente,simplificar_extraComponente,verificar_digito,simplificar_falhaComponente)
+simplificar_vantagem, simplificar_componente,simplificar_extraComponente,verificar_digito,simplificar_falhaComponente,simplificar_falhaPoderes)
 
 class Ficha:
     def __init__(self,np,nomeJogador,nomePersonagem):
@@ -191,6 +191,15 @@ class Ficha:
                     componente["falhas"][efeito_falha] = graduacao
                     return 
 
+    def adicionarFalhasPoderes(self,nomePoder,efeito_extra,graduacao):
+        for poder in self.poderes:
+            if nomePoder==poder["nome"]:
+                if "falhas" not in poder:
+                    poder["falhas"]= {}
+        
+                poder["falhas"][efeito_extra] = graduacao
+                return
+
     def fazerFicha(self):
         from armazenamento import salvar
         while(1):
@@ -230,7 +239,7 @@ class Ficha:
                     print("adicionar extra em componente (1)")
                     print("Adicionar extra em poder (2)Nao funciona ainda")
                     print("adicionar falha em componente (3)")
-                    print("adicionar falha em poder (4)Nao funciona ainda")
+                    print("adicionar falha em poder (4)")
                     
                     opc= verificar_digito("Escolha por numero: ")
                     match opc:
@@ -240,5 +249,8 @@ class Ficha:
 
                         case 3:
                             simplificar_falhaComponente(self)
+
+                        case 4:
+                            simplificar_falhaPoderes(self)
                 case 0:
                     return

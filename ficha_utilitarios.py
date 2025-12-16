@@ -183,13 +183,6 @@ def simplificar_falhaComponente(ficha):
     efeito_extra_lista = list(falhas_dict.keys())
     efeito_extra = escolher_da_lista(efeito_extra_lista)
     
-    if efeito_extra == "removivel":
-        graduacao=verificar_digito("Digite a graduação(-1 ou -2): ")
-        if graduacao == -1:
-           soma = sum(c["custo_total"] for c in poder["componentes"])
-               
-
-
     if falhas_dict[efeito_extra] != 0:
         graduacao = falhas_dict[efeito_extra]
     else:
@@ -198,6 +191,32 @@ def simplificar_falhaComponente(ficha):
 
     ficha.pontosDisponiveis -= graduacao
     ficha.adicionarFalhasComponentes(componente_nome,efeito_extra)
+
+def simplificar_falhaPoderes(ficha):
+    listar_poderes(ficha.poderes)
+    nomePoder=escolher_tudo(ficha.poderes)
+   
+   
+    #mostra e escolhe o efeito
+    efeito_extra_lista = list(falhas_dict.keys())
+    efeito_extra = escolher_da_lista(efeito_extra_lista)
+
+    if efeito_extra == "removivel":
+            graduacao=verificar_digito("Digite a graduação(1 ou 2): ")
+            if graduacao == 1:
+                soma = sum(c["custo_total"] for c in nomePoder["componentes"])
+                desconto= soma //5
+                
+                ficha.pontosDisponiveis += desconto
+                ficha.adicionarFalhasPoderes(nomePoder,efeito_extra,graduacao)
+            elif graduacao == 2:
+                soma = sum(c["custo_total"] for c in nomePoder["componentes"])
+                desconto= (soma //5) *2
+                
+                ficha.pontosDisponiveis += desconto
+                ficha.adicionarFalhasPoderes(nomePoder["nome"],efeito_extra,graduacao)
+
+
 
 def verificar_digito(mensagem):
     

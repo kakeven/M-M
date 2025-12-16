@@ -5,10 +5,10 @@ def menu():
     while(1):
         print("Fazer ficha (1): ")
         print("Carregar ficha (2)")
-        print("mensagem misteriosa (3)")
+        print("Sair (0)")
         opc = verificar_digito("Escolhe ai: ")
         
-        if opc>3 or opc<1:
+        if opc>3 or opc<0:
             print("\nDigite apenas numeros validos\n")
         else:
             match opc:
@@ -31,7 +31,9 @@ def menu():
                     ficha=carregar_ficha(caminho=caminho_feito)
                     print("Ficha carregada")
                     ficha.fazerFicha()
-        
+
+                case 0:
+                    exit()
         
 
 menu()
