@@ -1,5 +1,5 @@
 
-from poderes import *
+from poderes import extras_dict,falhas_dict,efeitos_poderes_dicionario,efeitos_poderes_lista,pericias_por_habilidade
 
 def validar_tudo(nome,categoria):
     return nome in categoria
@@ -12,6 +12,13 @@ def listar_poderes(categoria):
     for i,item in enumerate(categoria,start=1):
         print(f"{i} - ",item['nome'])
             
+def listar_poderes_retornar(categoria):
+    nomes = [item["nome"] for item in categoria]
+    # for i, nome in enumerate(nomes, start=1):
+    #     print(f"{i} - {nome}")
+    return nomes
+
+
 def escolher_tudo(categoria):
     escolha = input("Escolha por NUMERO:")
     # Escolha por número (seguro)
@@ -27,21 +34,22 @@ def escolher_tudo(categoria):
         return   
 
 def escolher_da_lista(lista):
-    print("\nEscolha um item:")
-    for i, item in enumerate(lista):
-        print(f"{i+1} - {item}")
-    escolha = input("Digite o número: ")
+    while True:
+        print("\nEscolha um item:")
+        for i, item in enumerate(lista):
+            print(f"{i+1} - {item}")
+        escolha = input("Digite o número: ")
 
-    if not escolha.isdigit():
-        print("Entrada inválida.")
-        return None
+        if not escolha.isdigit():
+            print("Entrada inválida.")
+            return None
 
-    indice = int(escolha) - 1
-    if 0 <= indice < len(lista):
-        return lista[indice]
-    else:
-        print("Número fora do intervalo.")
-        return None
+        indice = int(escolha) - 1
+        if 0 <= indice < len(lista):
+            return lista[indice]
+        else:
+            print("Número fora do intervalo.")
+            return None
 
 def simplificar_pericia(ficha):   
     nomePericia=escolher_da_lista(ficha.pericias_oficiais)
@@ -94,23 +102,16 @@ def simplificar_componente(ficha):
             efeito=efeito_escolhido
             graduacao = int(input("Graduação: "))
             custo_base=custo
-            extras, falhas = [], []
+            
         else:
             # Agora coleta os dados do componente
             nomeComponente = input("Nome do componente: ")
             efeito=efeito_escolhido
             graduacao = int(input("Graduação: "))
             custo_base = int(input("Custo base: "))
-            escolha_mod = input("Vai ter falhas ou extras? 0(não) / 1(sim): ")
-            extras, falhas = [], []
-            if escolha_mod == "1":
-                falhas_str = input("Digite a lista de falhas (ex: -1,-1 ou []): ").strip("[] ")
-                extras_str = input("Digite a lista de extras (ex: +1,+1 ou []): ").strip("[] ")
-
-                if falhas_str:
-                    falhas = list(map(int, falhas_str.split(",")))
-                if extras_str:
-                    extras = list(map(int, extras_str.split(",")))
+            
+        
+            
         
         # Adiciona de fato o componente no poder encontrado
         poder_encontrado["componentes"].append({
@@ -118,12 +119,12 @@ def simplificar_componente(ficha):
             "efeito": efeito,
             "graduacao": graduacao,
             "custo_base": custo_base,
-            "extras": extras,
-            "falhas": falhas,
-            "custo_total": (custo_base + sum(extras) - sum(falhas)) * graduacao
+            "extras": {},
+            "falhas": {},
+            "custo_total": custo_base  * graduacao
         })
 
-        ficha.pontosDisponiveis -= (custo_base + sum(extras) - sum(falhas)) * graduacao
+        ficha.pontosDisponiveis -= custo_base * graduacao
 
         print(f"\nComponente '{nomeComponente}' adicionado ao poder '{poder_encontrado['nome']}'!")
         print(f"Pontos restantes: {ficha.pontosDisponiveis}\n") 
@@ -132,3 +133,77 @@ def ver_pericia(ficha,nomePericia):
     return  ficha.habilidades.get(
         pericias_por_habilidade[nomePericia],0
     )
+
+def simplificar_extraComponente(ficha):
+    
+    #escolher poder
+    listar_poderes(ficha.poderes)
+    poder=escolher_tudo(ficha.poderes)
+   
+   #verificacao
+    if not poder["componentes"]:
+        print("Esse poder ainda não tem componentes.")
+        return
+
+    #mostra e escolhe o componente
+    lista_componentes = listar_poderes_retornar(poder["componentes"])
+    componente_nome = escolher_da_lista(lista_componentes)
+    
+    #mostra e escolhe o efeito
+    efeito_extra_lista = list(extras_dict.keys())
+    efeito_extra = escolher_da_lista(efeito_extra_lista)
+    
+    if extras_dict[efeito_extra] != 0:
+        graduacao = extras_dict[efeito_extra]
+    else:
+        graduacao=verificar_digito("Digite a graduação: ")
+
+
+    ficha.pontosDisponiveis -= graduacao
+    ficha.adicionarExtrasComponentes(componente_nome,efeito_extra)
+
+def simplificar_extraPoder(ficha):
+    ...
+
+def simplificar_falhaComponente(ficha):
+    #escolher poder
+    listar_poderes(ficha.poderes)
+    poder=escolher_tudo(ficha.poderes)
+   
+   #verificacao
+    if not poder["componentes"]:
+        print("Esse poder ainda não tem componentes.")
+        return
+
+    #mostra e escolhe o componente
+    lista_componentes = listar_poderes_retornar(poder["componentes"])
+    componente_nome = escolher_da_lista(lista_componentes)
+    
+    #mostra e escolhe o efeito
+    efeito_extra_lista = list(falhas_dict.keys())
+    efeito_extra = escolher_da_lista(efeito_extra_lista)
+    
+    if efeito_extra == "removivel":
+        graduacao=verificar_digito("Digite a graduação(-1 ou -2): ")
+        if graduacao == -1:
+           soma = sum(c["custo_total"] for c in poder["componentes"])
+               
+
+
+    if falhas_dict[efeito_extra] != 0:
+        graduacao = falhas_dict[efeito_extra]
+    else:
+        graduacao=verificar_digito("Digite a graduação: ")
+
+
+    ficha.pontosDisponiveis -= graduacao
+    ficha.adicionarFalhasComponentes(componente_nome,efeito_extra)
+
+def verificar_digito(mensagem):
+    
+    while True:
+        variavel= input(mensagem)
+        if variavel.isdigit():
+            return int(variavel)
+       
+        print("\nDigite apenas numeros cara, não é tao dificil")

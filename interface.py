@@ -1,34 +1,38 @@
 from ficha import Ficha
 from armazenamento import carregar_ficha
-
+from ficha_utilitarios import simplificar_componente,verificar_digito
 def menu():
     while(1):
         print("Fazer ficha (1): ")
         print("Carregar ficha (2)")
         print("mensagem misteriosa (3)")
+        opc = verificar_digito("Escolhe ai: ")
         
-        opc = int(input("Escolhe ai: "))
-        match opc:
-            case 1:
-                
-                nomeJogador = input("Nome do jogador: ")
-                nomePersonagem = input("Nome do personagem: ")
-                np=int(input("Nivel de poder(NP): "))
-                print("\n")
-                ficha = Ficha(
-                        np=np,
-                        nomeJogador=nomeJogador,
-                        nomePersonagem=nomePersonagem
-                    )
-                 
-                ficha.fazerFicha()
-            case 2:
-                caminho=input("Digite o nome da fica,tal qual, Não coloque o .json: ")
-                caminho_feito=f"{caminho}.json"
-                ficha=carregar_ficha(caminho=caminho_feito)
-                print("Ficha carregada")
-                ficha.fazerFicha()
-
+        if opc>3 or opc<1:
+            print("\nDigite apenas numeros validos\n")
+        else:
+            match opc:
+                case 1:
+                    
+                    nomeJogador = input("\nNome do jogador: ")
+                    nomePersonagem = input("\nNome do personagem: ")
+                    np=verificar_digito("\nNivel de poder(NP): ")
+                    print("\n")
+                    ficha = Ficha(
+                            np=np,
+                            nomeJogador=nomeJogador,
+                            nomePersonagem=nomePersonagem
+                        )
+                    ficha.fazerFicha()
+                    
+                case 2:
+                    caminho=input("Digite o nome da fica,tal qual, Não coloque o .json: ")
+                    caminho_feito=f"{caminho}.json"
+                    ficha=carregar_ficha(caminho=caminho_feito)
+                    print("Ficha carregada")
+                    ficha.fazerFicha()
+        
+        
 
 menu()
 

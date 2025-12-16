@@ -1,10 +1,28 @@
 {
-    "np": 10,
-    "nomeJogador": "",
-    "nomePersonagem": "",
-    "pontosDisponiveis": 120,
-    "total": 150,
-    "poderes": [],
+    "np": 999,
+    "nomeJogador": "dawd",
+    "nomePersonagem": "dawd",
+    "pontosDisponiveis": 14925,
+    "total": 14985,
+    "poderes": [
+        {
+            "nome": "raio laser",
+            "componentes": [
+                {
+                    "nome": "laser",
+                    "efeito": "Raio",
+                    "graduacao": 10,
+                    "custo_base": 2,
+                    "extras": {
+                        "preciso": 1,
+                        "concentracao": 1
+                    },
+                    "falhas": {},
+                    "custo_total": 20
+                }
+            ]
+        }
+    ],
     "habilidades": {
         "forca": 0,
         "agilidade": 10,
@@ -17,9 +35,15 @@
     },
     "pericias": [
         {
-            "nome": "acrobacia",
+            "nome": "combate a corpo-a-corpo",
             "graduação": 20,
             "bonus": 20,
+            "custo": 10
+        },
+        {
+            "nome": "acrobacia",
+            "graduação": 20,
+            "bonus": 30,
             "custo": 10
         }
     ],

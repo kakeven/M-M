@@ -1,6 +1,7 @@
 import json
-from poderes import efeitos_poderes_dicionario,efeitos_poderes_lista,vantagens,pericias_por_habilidade
-from ficha_utilitarios import simplificar_pericia, simplificar_habilidade, simplificar_vantagem, simplificar_componente
+from poderes import efeitos_poderes_dicionario,efeitos_poderes_lista,vantagens,pericias_por_habilidade,extras_dict
+from ficha_utilitarios import( simplificar_pericia, simplificar_habilidade,
+simplificar_vantagem, simplificar_componente,simplificar_extraComponente,verificar_digito,simplificar_falhaComponente)
 
 class Ficha:
     def __init__(self,np,nomeJogador,nomePersonagem):
@@ -58,17 +59,11 @@ class Ficha:
         self.vantagens.append(vantagem)
         print(f"pontos disponiveis: {self.pontosDisponiveis}")
 
-    def adicionarComponente(self, nomeComponente, efeito, graduacao, custo_base, extras=None, falhas=None):
-        # segurança contra None
-        extras = extras or []
-        falhas = falhas or []
-
-        # calcula modificadores
-        mod_extras = sum(extras)      # ex: [+1, +1]
-        mod_falhas = sum(falhas)      # ex: [-1]
+    def adicionarComponente(self, nomeComponente, efeito, graduacao, custo_base):
+             # ex: [-1]
 
         # custo por graduação já modificado
-        custo_grad_final = custo_base + mod_extras - mod_falhas
+        custo_grad_final = custo_base 
 
         if custo_grad_final < 1:
             print("O custo final por graduação não pode ser menor que 1.")
@@ -90,8 +85,8 @@ class Ficha:
             "efeito": efeito,
             "graduacao": graduacao,
             "custo_base": custo_base,
-            "extras": extras,
-            "falhas": falhas,
+            "extras": {},
+            "falhas": {},
             "custo_total": custo_total
         }
 
@@ -163,6 +158,39 @@ class Ficha:
             print(f"Graduações: {graduacoes}, Bônus total: {bonus}, Custo: {pontosInvs}")
             print(f"Pontos restantes: {self.pontosDisponiveis}\n")
 
+    def adicionarExtrasComponentes(self,nomeComponente,efeito_extra,graduacao=1):
+        #pegar o componente escolhido
+        for poder in self.poderes:
+            for componente in poder["componentes"]:
+                if componente["nome"]== nomeComponente:
+                    if "extras" not in componente:
+                        componente["extras"] = {}
+
+                    componente["extras"][efeito_extra] = graduacao
+                    return 
+
+    def adicionarExtrasPoderes(self,nomePoder,efeito_extra,graduacao=1):
+        for poder in self.poderes:
+            if nomePoder==poder["nome"]:
+                poder[efeito_extra][graduacao]
+                
+                if "extras" not in poder:
+                    poder["extras"]= {}
+        
+                poder["extras"][efeito_extra] = graduacao
+                return
+
+    def adicionarFalhasComponentes(self,nomeComponente,efeito_falha,graduacao=-1):
+        #pegar o componente escolhido
+        for poder in self.poderes:
+            for componente in poder["componentes"]:
+                if componente["nome"]== nomeComponente:
+                    if "falhas" not in componente:
+                        componente["falhas"] = {}
+
+                    componente["falhas"][efeito_falha] = graduacao
+                    return 
+
     def fazerFicha(self):
         from armazenamento import salvar
         while(1):
@@ -170,12 +198,13 @@ class Ficha:
             print("Adicionar habilidade(2)")
             print("Adicionar vantagem (3)")
             print("Adicionar poder (4)")
-            print("Adicionar componente em um poder(5) ")
+            print("Adicionar componente em um poder (5) ")
             print("Verificar pontos restantes(6)")
             print("Salvar ficha(7) ")
+            print("Adicionar Extras ou falhas(8)")
             print("Sair (0)")
             print('\n')
-            opc=int(input("Selecione a opção: "))
+            opc= verificar_digito("Escolha por numero: ")
 
             match opc:
                 case 1:
@@ -189,12 +218,27 @@ class Ficha:
                     nomePoder=input("Digite o nome do poder: ")
                     self.adicionarPoder(nomePoder=nomePoder)
                 case 5:
-                    simplificar_componente(self)              
+                    simplificar_componente(self)
+                                     
                 case 6:
                     print(f"\nVocê possui {self.pontosDisponiveis} pontos disponiveis! \n")
                 case 7:
                     variavel_arquivo=input("Digite o nome do arquivo: ")
                     variavel_arquivo_feita = f"{variavel_arquivo}.json"
                     salvar(self,arquivo=variavel_arquivo_feita)
+                case 8:
+                    print("adicionar extra em componente (1)")
+                    print("Adicionar extra em poder (2)Nao funciona ainda")
+                    print("adicionar falha em componente (3)")
+                    print("adicionar falha em poder (4)Nao funciona ainda")
+                    
+                    opc= verificar_digito("Escolha por numero: ")
+                    match opc:
+                        case 1:
+                            simplificar_extraComponente(self)
+
+
+                        case 3:
+                            simplificar_falhaComponente(self)
                 case 0:
                     return
