@@ -1,20 +1,40 @@
-Projeto de ficha para o RPG: Mutantes & Malfeitores 3 edição
+# Projeto de ficha — Mutantes & Malfeitores (3ª edição)
 
-Observações:
-  Tomei a liberdade de escolher não seguir a risca o material,então como adendo, as falhas nao possuem separação, explicando melhor, não é possivel adicionar uma falha apenas para     determinadas graduações. Exemplo: poder: kit superman, componente: {voo,graduações:10} , falha: cansativo, a falha é aplicada como um todo,servindo tanto para ganhar os pontos para uso como para deixar o personagem mais fraco, ent um personagem assim voaria e ficaria cansado em qualquer nivel de voo. O PDF exemplifica que é possivel adicionar apenas para fatias, seguindo o exemplo, cansativo ficaria apenas para graduacoes 9 e 10 do voo, podendo assim nao receber penalidade enquanto voaesse na velocidade 8, mas recebendo apenas pela fatia afetada.
-  
-  A vantagem equipamentos,ainda nao possui seus dados completos, sendo assim não será possivel adicionar veiculos,propriedades, entre outros. Em breve pretendo adicionar essa funcionalidade.
+Projeto de criação de fichas para o RPG **Mutantes & Malfeitores 3ª edição**.
 
+## Observações
+O projeto não segue o material oficial à risca.
 
-Funcionalidades ativa:
-  Criar,salvar e carregar personagens.
-  Criação de poderes completa.
-  Aplicação de custos de falhas e extras.
-  Todos os calculos da ficha foram automatizados.
+As falhas são aplicadas ao **poder como um todo**, não por faixas de graduação.
 
-No futuro:
-  Exportar para PDF.
-  funcionalidade da vantagem: Equipamentos.
-  Interface.
-  Edição direta da ficha.
-  
+Exemplo:  
+- Poder: Kit Superman  
+- Componente: Voo (Graduação 10)  
+- Falha: Cansativo  
+
+Nesse caso, o personagem ficará cansado **em qualquer nível de voo**.  
+No livro, a falha poderia ser aplicada apenas às graduações 9 e 10.
+
+Essa simplificação foi uma decisão de design.
+
+## Equipamentos
+A vantagem **Equipamentos** ainda não possui dados completos.
+
+Atualmente, não é possível adicionar:
+- Veículos
+- Propriedades
+- Outros itens complexos
+
+Essa funcionalidade será adicionada futuramente.
+
+## Funcionalidades Ativas
+- Criar, salvar e carregar personagens
+- Criação completa de poderes
+- Aplicação de custos de falhas e extras
+- Cálculos da ficha totalmente automatizados
+
+## Planejado
+- Exportação para PDF
+- Funcionalidade completa de Equipamentos
+- Interface gráfica
+- Edição direta da ficha
