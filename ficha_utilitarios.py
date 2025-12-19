@@ -1,5 +1,5 @@
 
-from poderes import extras_dict,falhas_dict,efeitos_poderes_dicionario,pericias_por_habilidade,extras_dict_atualizado,extra_hibrido
+from poderes import efeitos_poderes_dicionario,pericias_por_habilidade,extras_dict_atualizado
 
 def validar_tudo(nome,categoria):
     return nome in categoria
@@ -41,7 +41,7 @@ def escolher_da_lista(lista):
 
         if not escolha.isdigit():
             print("Entrada inválida.")
-            return None
+            continue
 
         indice = int(escolha) - 1
         if 0 <= indice < len(lista):
@@ -49,8 +49,6 @@ def escolher_da_lista(lista):
         else:
             print("Número fora do intervalo.")
            
-
-
 def simplificar_pericia(ficha):   
     nomePericia=escolher_da_lista(ficha.pericias_oficiais)
     if(validar_tudo(nomePericia,ficha.pericias_oficiais)):
@@ -60,8 +58,7 @@ def simplificar_pericia(ficha):
     else:
         print("Pericia invalida!")
 
-def simplificar_habilidade(ficha):             
-    
+def simplificar_habilidade(ficha):              
     nomeHabilidade=escolher_da_lista(ficha.habilidades_oficiais)
     if(validar_tudo(nomeHabilidade,ficha.habilidades_oficiais)):
         pontosInvestidos=int(input("digite quantas graduações vai investir na habilidade: \n"))
@@ -126,6 +123,8 @@ def simplificar_componente(ficha):
             "custo_total": custo_base  * graduacao
         })
 
+        
+
         ficha.pontosDisponiveis -= custo_base * graduacao
 
         print(f"\nComponente '{nomeComponente}' adicionado ao poder '{poder_encontrado['nome']}'!")
@@ -136,16 +135,24 @@ def ver_pericia(ficha,nomePericia):
         pericias_por_habilidade[nomePericia],0
     )
 
-def calcular_custosComponente(tipo,valor_tipo,custo_base,graduacao):
-    if tipo == "por_graduacao":
-        custo_base += valor_tipo
-        custo_total = custo_base *graduacao
-        return custo_total
-    
-    elif tipo=="fixo":
-        custo_total = valor_tipo + custo_base*graduacao
-        return custo_total
+def calcular_custosComponente(custo_base,graduacao,mod_g,mod_f):
+    custo_total=(custo_base+mod_g) * graduacao + mod_f
+    return custo_total
 
+def calcular_custosPoderes(poder):
+    custo_total=0
+
+    for componente in poder["componentes"]:
+        custo=calcular_custosComponente(custo_base=componente["custo_base"],
+        mod_g=componente["mod_por_graduacao"],
+        mod_f=componente["mod_fixo"],
+        graduacao = componente["graduacao"]
+        )
+    
+        
+        componente["custo_total"] = custo
+        custo_total += custo
+    return custo_total
 
 
 
@@ -163,7 +170,6 @@ def simplificar_extraComponente(ficha):
         return
 
     
-
     #mostra e escolhe o componente
     lista_componentes = listar_poderes_retornar(poder["componentes"])
     componente_nome = escolher_da_lista(lista_componentes)
@@ -186,45 +192,84 @@ def simplificar_extraComponente(ficha):
     
     #pegando o objeto do extra
     extra = extras_dict_atualizado[efeito_extra]
+    
     custo_antes = componente["custo_total"]
     
+    #verifica se o valor é uma lista
     if isinstance(extra["valor"],list):
         valor = escolher_da_lista(extra["valor"])   
     else:
         valor = extra["valor"]
     tipo = extra["tipo"]
     
-    if tipo == "por_graduacao":
-        componente["mod_por_graduacao"]+=valor
-    else:
-        componente["mod_fixo"]+=valor
-
-    custoDepois=calcular_custosComponente(tipo=tipo,valor_tipo=valor,custo_base=custobase,graduacao=graduacao)
-    resultado=custoDepois-custo_antes
+    #incializa o mod, para somar direto e sobreescrever
+    mod_g=componente["mod_por_graduacao"]
+    mod_f=componente["mod_fixo"]
     
-    componente["custo_total"]+= resultado
+    #verifca e decide o tipo
+    if tipo == "por_graduacao":
+        mod_g+=valor
+        componente["mod_por_graduacao"]=mod_g
+    else:
+        mod_f+=valor
+        componente["mod_fixo"]=mod_f
+    
+    custoDepois=calcular_custosComponente(custo_base=custobase,graduacao=graduacao,mod_g=mod_g,mod_f=mod_f)
+    
+    
+    resultado= custoDepois - custo_antes
+    componente["custo_total"]=custoDepois
     
     ficha.adicionarExtrasComponentes(componente_nome,efeito_extra,valor,tipo)
     ficha.pontosDisponiveis -= resultado
     
 
-# def simplificar_extraPoder(ficha):
-#     listar_poderes(ficha.poderes)
-#     nomePoder=escolher_tudo(ficha.poderes)
+def simplificar_extraPoder(ficha):
+    listar_poderes(ficha.poderes)
+    p=escolher_tudo(ficha.poderes)
    
-#     for poder in ficha.poderes:
-#         if nomePoder == poder:
-#             p = poder
-   
-#     #mostra e escolhe o efeito
-#     efeito_extra_lista = listar_poderes(extra_hibrido)
-#     efeito_extra = escolher_da_lista(efeito_extra_lista)
-
-#     for extra in extras_dict_atualizado:
-#         if efeito_extra == extra['nome']:
-#             e = extra
+    #pegar objeto poder
     
+   
+    #calcular o custo antes do extra
+    antigo_custo=sum(componente["custo_total"] for componente in p["componentes"])
+    
+    extra_poder = ["afeta outros","descritor variavel","efeito alternativo","ligado"]
+    
+    #mostra e escolhe o efeito
+    listar_atributos(extra_poder)
+    print("Somente esses efeitos podem ser aplicados a todo o conjunto poder\n")
+    efeito_extra = escolher_da_lista(extra_poder)
 
+    #pegar objeto extra
+    e = extras_dict_atualizado[efeito_extra]
+    
+    
+    if isinstance (e["valor"],list):
+        valor=escolher_da_lista(e["valor"])
+    else:
+        valor = e["valor"]
+
+    if "extras" not in p:
+        p["extras"] = {}
+
+    tipo=e["tipo"]
+    
+    for componente in p["componentes"]:
+        if tipo == "por_graduacao":
+            componente["mod_por_graduacao"] += valor
+        else:
+            componente["mod_fixo"] += valor
+
+
+    
+    novo_custo= calcular_custosPoderes(p)
+    diferenca = novo_custo - antigo_custo
+    if ficha.pontosDisponiveis < diferenca and diferenca >0:
+        print("Você nao possui pontos suficientes")
+
+    ficha.adicionarExtrasPoderes(p,efeito_extra,valor)
+    ficha.pontosDisponiveis -= diferenca
 # def simplificar_falhaComponente(ficha):
 #     #escolher poder
 #     listar_poderes(ficha.poderes)

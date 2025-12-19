@@ -2,24 +2,38 @@
     "np": 10,
     "nomeJogador": "",
     "nomePersonagem": "",
-    "pontosDisponiveis": 130,
+    "pontosDisponiveis": 108,
     "total": 150,
     "poderes": [
         {
-            "nome": "adwwa",
+            "nome": "laser",
             "componentes": [
                 {
-                    "nome": "sono",
-                    "efeito": "Sono",
+                    "nome": "laser",
+                    "efeito": "Raio",
                     "graduacao": 10,
                     "custo_base": 2,
                     "extras": {
-                        "contagioso": 1
+                        "alcance estendido": {
+                            "tipo": "por_graduacao",
+                            "valor": 1
+                        },
+                        "acurado": {
+                            "tipo": "por_graduacao",
+                            "valor": 1
+                        },
+                        "descritor variavel": {
+                            "tipo": "fixo",
+                            "valor": 2
+                        }
                     },
                     "falhas": {},
-                    "custo_total": 20
+                    "mod_por_graduacao": 2,
+                    "mod_fixo": 2,
+                    "custo_total": 42
                 }
-            ]
+            ],
+            "extras": {}
         }
     ],
     "habilidades": {

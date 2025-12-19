@@ -1,8 +1,8 @@
 {
     "np": 10,
-    "nomeJogador": "ahsargop",
-    "nomePersonagem": "psokfo",
-    "pontosDisponiveis": 120,
+    "nomeJogador": "",
+    "nomePersonagem": "",
+    "pontosDisponiveis": 130,
     "total": 150,
     "poderes": [
         {
@@ -19,7 +19,10 @@
                     "mod_fixo": 0,
                     "custo_total": 20
                 }
-            ]
+            ],
+            "extras": {
+                "ligado": 0
+            }
         }
     ],
     "habilidades": {

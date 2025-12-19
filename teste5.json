@@ -2,29 +2,29 @@
     "np": 10,
     "nomeJogador": "",
     "nomePersonagem": "",
-    "pontosDisponiveis": 120,
+    "pontosDisponiveis": 119,
     "total": 150,
     "poderes": [
         {
-            "nome": "",
+            "nome": "raio laser",
             "componentes": [
                 {
-                    "nome": "",
+                    "nome": "laser",
                     "efeito": "Raio",
                     "graduacao": 10,
                     "custo_base": 2,
-                    "extras": {
-                        "alcance": {
-                            "tipo": "por_graduacao",
-                            "valor": 1
-                        }
-                    },
+                    "extras": {},
                     "falhas": {},
                     "mod_por_graduacao": 1,
-                    "mod_fixo": 0,
-                    "custo_total": 30
+                    "mod_fixo": 1,
+                    "custo_total": 31
                 }
-            ]
+            ],
+            "extras": {
+                "ligado": 0,
+                "descritor variavel": 1,
+                "afeta outros": 1
+            }
         }
     ],
     "habilidades": {

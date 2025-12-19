@@ -1,23 +1,26 @@
 {
-    "np": 1,
-    "nomeJogador": "tsdawd",
-    "nomePersonagem": "dawdawvbtr",
-    "pontosDisponiveis": 13,
-    "total": 15,
+    "np": 10,
+    "nomeJogador": "",
+    "nomePersonagem": "",
+    "pontosDisponiveis": 130,
+    "total": 150,
     "poderes": [
         {
-            "nome": "teste",
+            "nome": "raio laser",
             "componentes": [
                 {
-                    "nome": "voo",
-                    "efeito": "Voo",
-                    "graduacao": 1,
+                    "nome": "laser",
+                    "efeito": "Raio",
+                    "graduacao": 10,
                     "custo_base": 2,
                     "extras": {},
                     "falhas": {},
-                    "custo_total": 2
+                    "mod_por_graduacao": 0,
+                    "mod_fixo": 0,
+                    "custo_total": 20
                 }
-            ]
+            ],
+            "extras": {}
         }
     ],
     "habilidades": {
