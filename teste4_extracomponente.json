@@ -1,0 +1,37 @@
+{
+    "np": 10,
+    "nomeJogador": "ahsargop",
+    "nomePersonagem": "psokfo",
+    "pontosDisponiveis": 120,
+    "total": 150,
+    "poderes": [
+        {
+            "nome": "raio laser",
+            "componentes": [
+                {
+                    "nome": "laser",
+                    "efeito": "Raio",
+                    "graduacao": 10,
+                    "custo_base": 2,
+                    "extras": {},
+                    "falhas": {},
+                    "mod_por_graduacao": 0,
+                    "mod_fixo": 0,
+                    "custo_total": 20
+                }
+            ]
+        }
+    ],
+    "habilidades": {
+        "forca": 0,
+        "agilidade": 0,
+        "destreza": 0,
+        "luta": 0,
+        "intelecto": 0,
+        "prontidao": 0,
+        "presenca": 0,
+        "vigor": 0
+    },
+    "pericias": [],
+    "vantagens": []
+}

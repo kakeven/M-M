@@ -1,7 +1,7 @@
 import json
 from poderes import efeitos_poderes_dicionario,efeitos_poderes_lista,vantagens,pericias_por_habilidade,extras_dict
 from ficha_utilitarios import( simplificar_pericia, simplificar_habilidade,
-simplificar_vantagem, simplificar_componente,simplificar_extraComponente,verificar_digito,simplificar_falhaComponente,simplificar_falhaPoderes)
+simplificar_vantagem, simplificar_componente,simplificar_extraComponente,verificar_digito)
 
 class Ficha:
     def __init__(self,np,nomeJogador,nomePersonagem):
@@ -158,7 +158,7 @@ class Ficha:
             print(f"Graduações: {graduacoes}, Bônus total: {bonus}, Custo: {pontosInvs}")
             print(f"Pontos restantes: {self.pontosDisponiveis}\n")
 
-    def adicionarExtrasComponentes(self,nomeComponente,efeito_extra,graduacao=1):
+    def adicionarExtrasComponentes(self,nomeComponente,efeito_extra,valor,tipo):
         #pegar o componente escolhido
         for poder in self.poderes:
             for componente in poder["componentes"]:
@@ -166,7 +166,15 @@ class Ficha:
                     if "extras" not in componente:
                         componente["extras"] = {}
 
-                    componente["extras"][efeito_extra] = graduacao
+             
+                    componente["extras"][efeito_extra] = {
+                    "tipo": tipo,
+                    "valor": valor
+                }
+                    
+                    from pprint import pprint
+                    pprint(componente)
+                    
                     return 
 
     def adicionarExtrasPoderes(self,nomePoder,efeito_extra,graduacao=1):
@@ -237,9 +245,9 @@ class Ficha:
                     salvar(self,arquivo=variavel_arquivo_feita)
                 case 8:
                     print("adicionar extra em componente (1)")
-                    print("Adicionar extra em poder (2)Nao funciona ainda")
-                    print("adicionar falha em componente (3)")
-                    print("adicionar falha em poder (4)")
+                    print("Adicionar extra em poder (2)NAO FUNCIONA AINDA")
+                    print("adicionar falha em componente (3)NAO FUNCIONA AINDA")
+                    print("adicionar falha em poder (4)NAO FUNCIONA AINDA")
                     
                     opc= verificar_digito("Escolha por numero: ")
                     match opc:
@@ -248,9 +256,14 @@ class Ficha:
 
 
                         case 3:
-                            simplificar_falhaComponente(self)
+                            #simplificar_falhaComponente(self)
 
-                        case 4:
-                            simplificar_falhaPoderes(self)
+                        #case 4:
+                            ...
+                            #simplificar_falhaPoderes(self)
+                        
+                        
+                    
+                
                 case 0:
                     return

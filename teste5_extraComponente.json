@@ -1,0 +1,42 @@
+{
+    "np": 10,
+    "nomeJogador": "",
+    "nomePersonagem": "",
+    "pontosDisponiveis": 120,
+    "total": 150,
+    "poderes": [
+        {
+            "nome": "",
+            "componentes": [
+                {
+                    "nome": "",
+                    "efeito": "Raio",
+                    "graduacao": 10,
+                    "custo_base": 2,
+                    "extras": {
+                        "alcance": {
+                            "tipo": "por_graduacao",
+                            "valor": 1
+                        }
+                    },
+                    "falhas": {},
+                    "mod_por_graduacao": 1,
+                    "mod_fixo": 0,
+                    "custo_total": 30
+                }
+            ]
+        }
+    ],
+    "habilidades": {
+        "forca": 0,
+        "agilidade": 0,
+        "destreza": 0,
+        "luta": 0,
+        "intelecto": 0,
+        "prontidao": 0,
+        "presenca": 0,
+        "vigor": 0
+    },
+    "pericias": [],
+    "vantagens": []
+}

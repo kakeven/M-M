@@ -458,6 +458,253 @@ extras_dict = {
     "traicoeiro": 1
 }
 
+extras_dict_atualizado = {
+    "acurado": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "afeta corporeo": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "afeta intangivel": {
+        "tipo": "fixo",
+        "valor": [1, 2]  # metade do efeito ou efeito completo
+    },
+    "afeta objetos": {
+        "tipo": "por_graduacao",
+        "valor": [0, 1]
+    },
+    "afeta outros": {
+        "tipo": "por_graduacao",
+        "valor": [0, 1]
+    },
+    "afeta tangivel": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "alcance": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "alcance estendido": {
+        "tipo": "por_graduacao",
+        "valor": [1,2,3,4,5,6,7,8,9,10]
+    },
+    "area": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "ataque": {
+        "tipo": "por_graduacao",
+        "valor": 0
+    },
+    "aumentar massa": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "caracteristica": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "condicional": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "contagioso": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "descritor variavel": {
+        "tipo": "fixo",
+        "valor": [1, 2]
+    },
+    "dimensional": {
+        "tipo": "fixo",
+        "valor": [1, 2, 3]
+    },
+    "distancia aumentada": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "dividido": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "duracao aumentada": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "efeito alternativo": {
+        "tipo": "fixo",
+        "valor": [1, 2]
+    },
+    "efeito secundario": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "impenetravel": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "inato": {
+        "tipo": "fixo",
+        "valor": 1
+    },
+    "incuravel": {
+        "tipo": "fixo",
+        "valor": 1
+    },
+    "indireto": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "ligado": {
+        "tipo": "fixo",
+        "valor": 0
+    },
+    "multiataque": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "penetrante": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "preciso": {
+        "tipo": "fixo",
+        "valor": 1
+    },
+    "reacao": {
+        "tipo": "por_graduacao",
+        "valor": [1, 2, 3]
+    },
+    "resistencia alternativa": {
+        "tipo": "por_graduacao",
+        "valor": [0, 1]
+    },
+    "reversivel": {
+        "tipo": "fixo",
+        "valor": 1
+    },
+    "ricochetear": {
+        "tipo": "fixo",
+        "valor": 1
+    },
+    "seletivo": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "sonifero": {
+        "tipo": "por_graduacao",
+        "valor": 0
+    },
+    "sustentado": {
+        "tipo": "por_graduacao",
+        "valor": 0
+    },
+    "sutil": {
+        "tipo": "fixo",
+        "valor": [1, 2]
+    },
+    "teleguiado": {
+        "tipo": "por_graduacao",
+        "valor": 1
+    },
+    "traicoeiro": {
+        "tipo": "fixo",
+        "valor": 1
+    }
+}
+
+# Extras aplicáveis SOMENTE a COMPONENTES (efeitos)
+
+extra_componente = [
+    "acurado",
+    "afeta corporeo",
+    "afeta intangivel",
+    "afeta objetos",
+    "afeta tangivel",
+    "alcance",
+    "alcance estendido",
+    "area",
+    "ataque",
+    "aumentar massa",
+    "caracteristica",
+    "condicional",
+    "contagioso",
+    "dimensional",
+    "distancia aumentada",
+    "dividido",
+    "duracao aumentada",
+    "efeito secundario",
+    "impenetravel",
+    "inato",
+    "incuravel",
+    "indireto",
+    "multiataque",
+    "penetrante",
+    "preciso",
+    "reacao",
+    "resistencia alternativa",
+    "reversivel",
+    "ricochetear",
+    "seletivo",
+    "sonifero",
+    "sustentado",
+    "sutil",
+    "teleguiado",
+    "traicoeiro"
+]
+
+
+# Extras hibridos (podem ser poder ou componente)
+extra_hibrido = [
+    "afeta outros",
+    "descritor variavel",
+    "efeito alternativo",
+    "ligado"
+]
+
+
+
+
+
+
+
+
+
+# Falhas aplicáveis SOMENTE a COMPONENTES (efeitos)
+falha_componente = [
+    "Ação Aumentada",        # altera como UM efeito é usado
+    "Alcance Diminuído",     # mexe no alcance do efeito
+    "Alcance Reduzido",      # idem
+    "Baseado em Agarrar",    # requisito de uso do efeito
+    "Cansativo",             # custo físico ao usar o efeito
+    "Concentração",          # altera duração de efeito sustentado
+    "Dependente de Sentido", # condição para o efeito funcionar
+    "Dissipação",            # degrada graduação do efeito
+    "Distração",             # penalidade enquanto usa o efeito
+    "Efeito Colateral",      # falha gera consequência ligada ao efeito
+    "Exige Teste",           # teste para ativar o efeito
+    "Inconstante",           # chance do efeito funcionar
+    "Incontrolável",         # perda de controle do efeito
+    "Impreciso",             # penalidade em ataques com o efeito
+    "Permanente",            # estado do efeito (não desligável)
+    "Resistível",            # adiciona teste de resistência
+    "Retroalimentação"       # dano vindo do próprio efeito
+]
+
+# Falhas HÍBRIDAS (dependem do escopo narrativo e mecânico)
+falha_hibrida = [
+    "Ativação",     # se liga tudo → poder | se liga só um efeito → componente
+    "Limitado",     # se limita o conceito inteiro → poder | se limita um efeito → componente
+    "Peculiaridade",# pode ser global ou local
+    "Perceptível"   # pode denunciar um efeito ou o poder inteiro
+]
+
+
+
 falhas_dict = {
     "acao aumentada": 0,
     "alcance diminuido": -1,
@@ -481,4 +728,95 @@ falhas_dict = {
     "removivel": 0,
     "resistivel": -1,
     "retroalimentacao": -1
+}
+falhas_dict_atualizado = {
+    "acao aumentada": {
+        "tipo": "por_graduacao",
+        "valor": [-1, -2, -3]
+    },
+    "alcance diminuido": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "alcance reduzido": {
+        "tipo": "por_graduacao",
+        "valor": [-1, -2]
+    },
+    "ativacao": {
+        "tipo": "fixo",
+        "valor": [-1, -2]
+    },
+    "baseado em agarrar": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "cansativo": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "concentracao": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "dependente de sentido": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "dissipacao": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "distracao": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "efeito colateral": {
+        "tipo": "por_graduacao",
+        "valor": [-1, -2]
+    },
+    "exige teste": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "inconstante": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "incontrolavel": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "impreciso": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "limitado": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "peculiaridade": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "perceptivel": {
+        "tipo": "fixo",
+        "valor": -1
+    },
+    "permanente": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "removivel": {
+        "tipo": "especial",
+        "valor": [-1, -2],
+        "regra": "a cada 5 pontos"
+    },
+    "resistivel": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    },
+    "retroalimentacao": {
+        "tipo": "por_graduacao",
+        "valor": -1
+    }
 }
