@@ -17,6 +17,17 @@ No livro, a falha poderia ser aplicada apenas às graduações 9 e 10.
 
 Essa simplificação foi uma decisão de design.
 
+## Observação sobre seleção de dados
+
+A seleção de **itens, vantagens, perícias e habilidades** é feita por meio de **números**.
+
+Essa abordagem foi adotada para:
+- Padronizar a escrita dos dados
+- Evitar erros humanos de digitação
+- Garantir consistência no JSON gerado
+- Facilitar validações e cálculos automáticos
+
+
 ## Equipamentos
 A vantagem **Equipamentos** ainda não possui dados completos.
 
