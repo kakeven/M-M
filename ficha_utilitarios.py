@@ -1,5 +1,5 @@
 
-from poderes import efeitos_poderes_dicionario,pericias_por_habilidade,extras_dict_atualizado
+from poderes import efeitos_poderes_dicionario,pericias_por_habilidade,extras_dict_atualizado,falhas_dict_atualizado
 
 def validar_tudo(nome,categoria):
     return nome in categoria
@@ -225,9 +225,12 @@ def simplificar_extraComponente(ficha):
     
 
 def simplificar_extraPoder(ficha):
+    
     listar_poderes(ficha.poderes)
     p=escolher_tudo(ficha.poderes)
    
+    if "extras" not in p:
+        p["extras"] = {}
     #pegar objeto poder
     
    
@@ -250,8 +253,7 @@ def simplificar_extraPoder(ficha):
     else:
         valor = e["valor"]
 
-    if "extras" not in p:
-        p["extras"] = {}
+    
 
     tipo=e["tipo"]
     
@@ -270,68 +272,134 @@ def simplificar_extraPoder(ficha):
 
     ficha.adicionarExtrasPoderes(p,efeito_extra,valor)
     ficha.pontosDisponiveis -= diferenca
-# def simplificar_falhaComponente(ficha):
-#     #escolher poder
-#     listar_poderes(ficha.poderes)
-#     poder=escolher_tudo(ficha.poderes)
-   
-#    #verificacao
-#     if not poder["componentes"]:
-#         print("Esse poder ainda não tem componentes.")
-#         return
 
-#     #mostra e escolhe o componente
-#     lista_componentes = listar_poderes_retornar(poder["componentes"])
-#     componente_nome = escolher_da_lista(lista_componentes)
+
+def simplificar_falhaComponente(ficha):
+    #escolher poder
+        listar_poderes(ficha.poderes)
+        poder=escolher_tudo(ficha.poderes)
+
+    #verificacao
+        if not poder["componentes"]:
+            print("Esse poder ainda não tem componentes.")
+            return
+
+        #mostra e escolhe o componente
+        lista_componentes = listar_poderes_retornar(poder["componentes"])
+        componente_nome = escolher_da_lista(lista_componentes)
+
+        #pegar objeto de componente
+        componente = None
+        for c in poder["componentes"]:
+            if c["nome"] == componente_nome:
+                componente = c
+                break
+
+        custo_antes = componente["custo_total"]
+        custobase= componente["custo_base"]
+        graduacao = componente["graduacao"]
+
+        #mostra e escolhe o efeito
+        efeito_extra_lista = list(falhas_dict_atualizado)
+        
+        efeito_extra = escolher_da_lista(efeito_extra_lista)
+        falha = falhas_dict_atualizado[efeito_extra]
+        valor = falha["valor"]
+        if isinstance(valor,list):
+            valor= escolher_da_lista(valor)        
+
+        tipo= falha["tipo"]
+
+         #incializa o mod, para somar direto e sobreescrever
+        mod_g=componente["mod_por_graduacao"]
+        mod_f=componente["mod_fixo"]
+        
+        #verifca e decide o tipo
+        if tipo == "por_graduacao":
+            mod_g+=valor
+            componente["mod_por_graduacao"]=mod_g
+        else:
+            mod_f+=valor
+            componente["mod_fixo"]=mod_f
+            
+        
+        custoDepois=calcular_custosComponente(custo_base=custobase,graduacao=graduacao,mod_g=mod_g,mod_f=mod_f)
     
-#     #mostra e escolhe o efeito
-#     efeito_extra_lista = list(falhas_dict.keys())
-#     efeito_extra = escolher_da_lista(efeito_extra_lista)
+        resultado= custoDepois - custo_antes
+        componente["custo_total"]=custoDepois
+        
+        ficha.adicionarFalhasComponentes(componente_nome,efeito_extra,valor,tipo)
+        
+        #RESULTADO É NEGATIVO, ENT PONTOS - (-RESULTADO) = PONTOS+RESULTADO
+        ficha.pontosDisponiveis -= resultado
+
+
+def simplificar_falhaPoderes(ficha):
     
-#     if falhas_dict[efeito_extra] != 0:
-#         graduacao = falhas_dict[efeito_extra]
-#     else:
-#         graduacao=verificar_digito("Digite a graduação: ")
 
-
-#     ficha.pontosDisponiveis -= graduacao
-#     ficha.adicionarFalhasComponentes(componente_nome,efeito_extra)
-
-# def simplificar_falhaPoderes(ficha):
-#     listar_poderes(ficha.poderes)
-#     nomePoder=escolher_tudo(ficha.poderes)
-   
-   
-#     #mostra e escolhe o efeito
-#     efeito_extra_lista = list(falhas_dict.keys())
-#     efeito_extra = escolher_da_lista(efeito_extra_lista)
+    listar_poderes(ficha.poderes)
+    p=escolher_tudo(ficha.poderes)
     
-#     if efeito_extra == "removivel":
-#             intensidade=verificar_digito("Digite a intensidade(1 ou 2): ")
-#             if intensidade == 1:
-#                 soma = sum(c["custo_total"] for c in nomePoder["componentes"])
-#                 desconto= soma //5
-                
-#                 ficha.pontosDisponiveis += desconto
-#                 ficha.adicionarFalhasPoderes(nomePoder["nome"],efeito_extra,intensidade)
-#             elif intensidade == 2:
-#                 soma = sum(c["custo_total"] for c in nomePoder["componentes"])
-#                 desconto= (soma //5) *2
-                
-#                 ficha.pontosDisponiveis += desconto
-#                 ficha.adicionarFalhasPoderes(nomePoder["nome"],efeito_extra,intensidade)
+    if "falhas" not in p:
+        p["falhas"] = {}
 
-#     falhas_variaveis=["acao aumentada","alcance reduzido","ativacao","efeito colateral"]
+    #calcular o custo antes do extra
+    antigo_custo=sum(componente["custo_total"] for componente in p["componentes"])
+    
+    falhas_variaveis=["acao aumentada","alcance reduzido","ativacao","efeito colateral","removivel"]
 
-#     if efeito_extra in falhas_variaveis:
-#         graduacao=verificar_digito("Digite a graduação: ")
-#         custo_base = verificar_digito("Digite o custo base")
-#         ficha.pontosDisponiveis += (graduacao*custo_base)
-#         ficha.adicionarFalhasPoderes(nomePoder["nome"],efeito_extra,graduacao)
-#     else:
-#         graduacao=verificar_digito("Digite a graduação: ")
-#         ficha.pontosDisponiveis += graduacao
-#         ficha.adicionarFalhasPoderes(nomePoder["nome"],efeito_extra,graduacao)
+    #mostra e escolhe o efeito
+    listar_atributos(falhas_variaveis)
+    print("Somente esses efeitos podem ser aplicados a todo o conjunto poder\n")
+    efeito_extra = escolher_da_lista(falhas_variaveis)
+
+
+    if efeito_extra == "removivel":
+        intensidade=verificar_digito("Digite a intensidade(1 ou 2): ")
+        if intensidade == 1:
+            soma = sum(c["custo_total"] for c in p["componentes"])
+            desconto= soma //5
+            
+            ficha.pontosDisponiveis += desconto
+            ficha.adicionarFalhasPoderes(p,efeito_extra,intensidade)
+            return
+        elif intensidade == 2:
+            soma = sum(c["custo_total"] for c in p["componentes"])
+            desconto= (soma //5) *2
+            
+            ficha.pontosDisponiveis += desconto
+            ficha.adicionarFalhasPoderes(p,efeito_extra,intensidade)
+            return
+
+
+    #pegar objeto extra
+    e = falhas_dict_atualizado[efeito_extra]
+    
+    
+    if isinstance (e["valor"],list):
+        valor=escolher_da_lista(e["valor"])
+    else:
+        valor = e["valor"]
+
+    
+
+    tipo=e["tipo"]
+    
+    for componente in p["componentes"]:
+        if tipo == "por_graduacao":
+            componente["mod_por_graduacao"] += valor
+        else:
+            componente["mod_fixo"] += valor
+
+
+    
+    novo_custo= calcular_custosPoderes(p)
+    diferenca = novo_custo - antigo_custo
+    if ficha.pontosDisponiveis < diferenca and diferenca >0:
+        print("Você nao possui pontos suficientes")
+
+    ficha.adicionarFalhasPoderes(p,efeito_extra,valor)
+    ficha.pontosDisponiveis -= diferenca
 
 def verificar_digito(mensagem):
     

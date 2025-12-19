@@ -1,6 +1,6 @@
 from ficha import Ficha
 from armazenamento import carregar_ficha
-from ficha_utilitarios import simplificar_componente,verificar_digito
+from ficha_utilitarios import verificar_digito
 def menu():
     while(1):
         print("Fazer ficha (1): ")

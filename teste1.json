@@ -2,38 +2,37 @@
     "np": 10,
     "nomeJogador": "",
     "nomePersonagem": "",
-    "pontosDisponiveis": 108,
+    "pontosDisponiveis": 139,
     "total": 150,
     "poderes": [
         {
-            "nome": "laser",
+            "nome": "Composto K",
             "componentes": [
                 {
-                    "nome": "laser",
-                    "efeito": "Raio",
+                    "nome": "voo",
+                    "efeito": "Voo",
                     "graduacao": 10,
                     "custo_base": 2,
                     "extras": {
-                        "alcance estendido": {
-                            "tipo": "por_graduacao",
-                            "valor": 1
-                        },
-                        "acurado": {
-                            "tipo": "por_graduacao",
-                            "valor": 1
-                        },
-                        "descritor variavel": {
+                        "inato": {
                             "tipo": "fixo",
-                            "valor": 2
+                            "valor": 1
                         }
                     },
-                    "falhas": {},
-                    "mod_por_graduacao": 2,
-                    "mod_fixo": 2,
-                    "custo_total": 42
+                    "falhas": {
+                        "cansativo": {
+                            "tipo": "por_graduacao",
+                            "valor": -1
+                        }
+                    },
+                    "mod_por_graduacao": -1,
+                    "mod_fixo": 1,
+                    "custo_total": 11
                 }
             ],
-            "extras": {}
+            "extras": {
+                "ligado": 0
+            }
         }
     ],
     "habilidades": {

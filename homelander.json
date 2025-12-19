@@ -1,177 +1,185 @@
 {
     "np": 10,
-    "nomeJogador": "Kauã",
-    "nomePersonagem": "teste",
-    "pontosDisponiveis": 16,
+    "nomeJogador": "kaua",
+    "nomePersonagem": "Kaleo",
+    "pontosDisponiveis": 17,
     "total": 150,
     "poderes": [
         {
-            "nome": "Composto K",
+            "nome": "composto K",
             "componentes": [
                 {
                     "nome": "forca",
-                    "efeito": "geral",
+                    "efeito": "Característica Aumentada",
                     "graduacao": 10,
                     "custo_base": 2,
-                    "extras": [],
-                    "falhas": [],
+                    "extras": {},
+                    "falhas": {},
+                    "mod_por_graduacao": 0,
+                    "mod_fixo": 0,
                     "custo_total": 20
                 },
                 {
                     "nome": "voo",
-                    "efeito": "movimento",
-                    "graduacao": 9,
+                    "efeito": "Voo",
+                    "graduacao": 10,
                     "custo_base": 2,
-                    "extras": [],
-                    "falhas": [],
-                    "custo_total": 18
+                    "extras": {},
+                    "falhas": {
+                        "cansativo": {
+                            "tipo": "por_graduacao",
+                            "valor": -1
+                        }
+                    },
+                    "mod_por_graduacao": -1,
+                    "mod_fixo": 0,
+                    "custo_total": 10
                 },
                 {
                     "nome": "vigor",
-                    "efeito": "geral",
-                    "graduacao": 7,
+                    "efeito": "Característica Aumentada",
+                    "graduacao": 8,
                     "custo_base": 2,
-                    "extras": [],
-                    "falhas": [],
-                    "custo_total": 14
-                },
-                {
-                    "nome": "agilidade",
-                    "efeito": "geral",
-                    "graduacao": 4,
-                    "custo_base": 2,
-                    "extras": [],
-                    "falhas": [],
-                    "custo_total": 8
-                },
-                {
-                    "nome": "Sentidos",
-                    "efeito": "sensorial",
-                    "graduacao": 5,
-                    "custo_base": 1,
-                    "extras": [],
-                    "falhas": [],
-                    "custo_total": 5
-                },
-                {
-                    "nome": "velocidade",
-                    "efeito": "movimento",
-                    "graduacao": 2,
-                    "custo_base": 1,
-                    "extras": [],
-                    "falhas": [],
-                    "custo_total": 2
+                    "extras": {},
+                    "falhas": {},
+                    "mod_por_graduacao": 0,
+                    "mod_fixo": 0,
+                    "custo_total": 16
                 },
                 {
                     "nome": "fator de cura",
                     "efeito": "Regeneração",
-                    "graduacao": 4,
-                    "custo_base": 1,
-                    "extras": [],
-                    "falhas": [],
-                    "custo_total": 4
-                }
-            ]
-        },
-        {
-            "nome": "raio laser",
-            "componentes": [
-                {
-                    "nome": "dano",
-                    "efeito": "dano",
-                    "graduacao": 4,
-                    "custo_base": 1,
-                    "extras": [],
-                    "falhas": [],
-                    "custo_total": 4
-                },
-                {
-                    "nome": "Alcance",
-                    "efeito": "alcance",
                     "graduacao": 2,
                     "custo_base": 1,
-                    "extras": [
-                        4
-                    ],
-                    "falhas": [],
-                    "custo_total": 10
-                }
-            ]
-        },
-        {
-            "nome": "imunidade",
-            "componentes": [
+                    "extras": {},
+                    "falhas": {},
+                    "mod_por_graduacao": 0,
+                    "mod_fixo": 0,
+                    "custo_total": 2
+                },
                 {
-                    "nome": "imunidade",
-                    "efeito": "defesa",
+                    "nome": "sentidos",
+                    "efeito": "Sentidos",
+                    "graduacao": 5,
+                    "custo_base": 1,
+                    "extras": {},
+                    "falhas": {},
+                    "mod_por_graduacao": 0,
+                    "mod_fixo": 0,
+                    "custo_total": 5
+                },
+                {
+                    "nome": "invulnerabilidade",
+                    "efeito": "Imunidade",
                     "graduacao": 10,
                     "custo_base": 1,
-                    "extras": [],
-                    "falhas": [],
+                    "extras": {},
+                    "falhas": {},
+                    "mod_por_graduacao": 0,
+                    "mod_fixo": 0,
                     "custo_total": 10
+                },
+                {
+                    "nome": "supervelocidade",
+                    "efeito": "Supervelocidade",
+                    "graduacao": 3,
+                    "custo_base": 3,
+                    "extras": {},
+                    "falhas": {},
+                    "mod_por_graduacao": 0,
+                    "mod_fixo": 0,
+                    "custo_total": 9
+                },
+                {
+                    "nome": "destreza",
+                    "efeito": "Característica Aumentada",
+                    "graduacao": 7,
+                    "custo_base": 2,
+                    "extras": {},
+                    "falhas": {},
+                    "mod_por_graduacao": 0,
+                    "mod_fixo": 0,
+                    "custo_total": 14
+                },
+                {
+                    "nome": "agilidade",
+                    "efeito": "Característica Aumentada",
+                    "graduacao": 7,
+                    "custo_base": 2,
+                    "extras": {},
+                    "falhas": {},
+                    "mod_por_graduacao": 0,
+                    "mod_fixo": 0,
+                    "custo_total": 14
+                },
+                {
+                    "nome": "raio laser",
+                    "efeito": "Raio",
+                    "graduacao": 6,
+                    "custo_base": 2,
+                    "extras": {
+                        "alcance estendido": {
+                            "tipo": "por_graduacao",
+                            "valor": 3
+                        }
+                    },
+                    "falhas": {
+                        "concentracao": {
+                            "tipo": "por_graduacao",
+                            "valor": -1
+                        },
+                        "cansativo": {
+                            "tipo": "por_graduacao",
+                            "valor": -1
+                        }
+                    },
+                    "mod_por_graduacao": 1,
+                    "mod_fixo": 0,
+                    "custo_total": 18
                 }
-            ]
+            ],
+            "falhas": {
+                "removivel": 1
+            }
         }
     ],
-    "habilidades": [
-        {
-            "nome": "forca",
-            "pontosGastos": 0,
-            "habilidade": 0
-        },
-        {
-            "nome": "agilidade",
-            "pontosGastos": 0,
-            "habilidade": 0
-        },
-        {
-            "nome": "presenca",
-            "pontosGastos": 2,
-            "habilidade": 1
-        },
-        {
-            "nome": "vigor",
-            "pontosGastos": 0,
-            "habilidade": 0
-        },
-        {
-            "nome": "intelecto",
-            "pontosGastos": 16,
-            "habilidade": 8
-        },
-        {
-            "nome": "luta",
-            "pontosGastos": 2,
-            "habilidade": 1
-        },
-        {
-            "nome": "prontidao",
-            "pontosGastos": 2,
-            "habilidade": 1
-        },
-        {
-            "nome": "destreza",
-            "pontosGastos": 2,
-            "habilidade": 1
-        }
-    ],
+    "habilidades": {
+        "forca": 0,
+        "agilidade": 0,
+        "destreza": 0,
+        "luta": 0,
+        "intelecto": 8,
+        "prontidao": 0,
+        "presenca": 1,
+        "vigor": 0
+    },
     "pericias": [
         {
             "nome": "tecnologia",
+            "graduação": 10,
+            "bonus": 18,
+            "custo": 5
+        },
+        {
+            "nome": "investigacao",
             "graduação": 4,
             "bonus": 12,
             "custo": 2
-        },
-        {
-            "nome": "veiculos",
-            "graduação": 2,
-            "bonus": 3,
-            "custo": 1
         }
     ],
     "vantagens": [
         {
+            "nome": "beneficio",
+            "graduacao": 6,
+            "pontos gastos": 6
+        },
+        {
             "nome": "faz tudo",
+            "graduacao": 1,
+            "pontos gastos": 1
+        },
+        {
+            "nome": "bem informado",
             "graduacao": 1,
             "pontos gastos": 1
         },
@@ -181,17 +189,17 @@
             "pontos gastos": 3
         },
         {
-            "nome": "bem relacionado",
+            "nome": "inventor",
             "graduacao": 1,
             "pontos gastos": 1
         },
         {
-            "nome": "beneficio",
-            "graduacao": 6,
-            "pontos gastos": 6
+            "nome": "atraente",
+            "graduacao": 1,
+            "pontos gastos": 1
         },
         {
-            "nome": "destemido",
+            "nome": "ferramentas aprimoradas",
             "graduacao": 1,
             "pontos gastos": 1
         }
