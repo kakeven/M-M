@@ -1,7 +1,7 @@
 import json
 from poderes import efeitos_poderes_dicionario,efeitos_poderes_lista,vantagens,pericias_por_habilidade
 from ficha_utilitarios import( simplificar_pericia, simplificar_habilidade,
-simplificar_vantagem, simplificar_componente,simplificar_extraComponente,verificar_digito,simplificar_extraPoder,simplificar_falhaComponente,simplificar_falhaPoderes)
+simplificar_vantagem, simplificar_componente,simplificar_extraComponente,verificar_digito,simplificar_extraPoder,simplificar_falhaComponente,simplificar_falhaPoderes,mostrar_ficha_atual)
 
 class Ficha:
     def __init__(self,np,nomeJogador,nomePersonagem):
@@ -205,6 +205,7 @@ class Ficha:
             print("Verificar pontos restantes(6)")
             print("Salvar ficha(7) ")
             print("Adicionar Extras ou falhas(8)")
+            print("Ver ficha (9)")
             print("Sair (0)")
             print('\n')
             opc= verificar_digito("Escolha por numero: ")
@@ -239,18 +240,15 @@ class Ficha:
                     match opc:
                         case 1:
                             simplificar_extraComponente(self)
-
                         case 2: 
                             simplificar_extraPoder(self)
                         case 3:
                             simplificar_falhaComponente(self)
-
                         case 4:
-            
                             simplificar_falhaPoderes(self)
-                        
-                        
-                    
+                           
+                case 9:
+                    mostrar_ficha_atual(self)
                 
                 case 0:
                     return

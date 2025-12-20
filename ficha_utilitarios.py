@@ -11,7 +11,11 @@ def listar_atributos(categoria):
 def listar_poderes(categoria):
     for i,item in enumerate(categoria,start=1):
         print(f"{i} - ",item['nome'])
-            
+
+def listar_ficha(categoria,chave1,chave2):
+    for i,item in enumerate(categoria,start=1):
+        print(f"{item[chave1]} | graduação: {item[chave2]}")
+
 def listar_poderes_retornar(categoria):
     nomes = [item["nome"] for item in categoria]
     # for i, nome in enumerate(nomes, start=1):
@@ -154,10 +158,6 @@ def calcular_custosPoderes(poder):
         custo_total += custo
     return custo_total
 
-
-
-
-
 def simplificar_extraComponente(ficha):
     
     #escolher poder
@@ -223,7 +223,6 @@ def simplificar_extraComponente(ficha):
     ficha.adicionarExtrasComponentes(componente_nome,efeito_extra,valor,tipo)
     ficha.pontosDisponiveis -= resultado
     
-
 def simplificar_extraPoder(ficha):
     
     listar_poderes(ficha.poderes)
@@ -272,7 +271,6 @@ def simplificar_extraPoder(ficha):
 
     ficha.adicionarExtrasPoderes(p,efeito_extra,valor)
     ficha.pontosDisponiveis -= diferenca
-
 
 def simplificar_falhaComponente(ficha):
     #escolher poder
@@ -333,7 +331,6 @@ def simplificar_falhaComponente(ficha):
         #RESULTADO É NEGATIVO, ENT PONTOS - (-RESULTADO) = PONTOS+RESULTADO
         ficha.pontosDisponiveis -= resultado
 
-
 def simplificar_falhaPoderes(ficha):
     
 
@@ -381,8 +378,6 @@ def simplificar_falhaPoderes(ficha):
     else:
         valor = e["valor"]
 
-    
-
     tipo=e["tipo"]
     
     for componente in p["componentes"]:
@@ -409,3 +404,46 @@ def verificar_digito(mensagem):
             return int(variavel)
        
         print("\nDigite apenas numeros cara, não é tao dificil")
+
+def mostrar_ficha_atual(ficha):
+
+    print("-----------------FICHA-----------------")
+    print(f"Nome do jogador: {ficha.nomeJogador}")
+    print(f"Nome do personagem: {ficha.nomePersonagem}")
+    print(f"Nivel de poder(NP): {ficha.np} | pontos disponiveis: {ficha.pontosDisponiveis}")
+    print("\n")
+    print(f"""  HABILIDADES: 
+    
+        Força: {ficha.habilidades["forca"]}
+        Agilidade: {ficha.habilidades["agilidade"]}
+        Destreza: {ficha.habilidades["destreza"]}
+        Intelecto: {ficha.habilidades["intelecto"]}
+        Luta: {ficha.habilidades["luta"]}
+        Vigor: {ficha.habilidades["vigor"]}
+        Prontidão: {ficha.habilidades["prontidao"]}
+        Presença: {ficha.habilidades["presenca"]}
+""")
+    print("     VANTAGENS: ")
+    
+    if ficha.vantagens:
+       listar_ficha(ficha.vantagens,"nome","graduacao")
+         
+    else:
+        print("Nenhuma vantagem adquirida")
+
+
+    print("\n   PERICIAS: ")
+
+    if ficha.pericias:
+        listar_ficha(ficha.pericias,"nome","graduação") 
+    else:
+        print("Nenhuma pericia adquirida")
+
+    print("\n   PODERES: ")
+
+    if ficha.poderes:
+        listar_poderes(ficha.poderes) 
+    else:
+        print("Nenhum poder adquirido")
+    
+    print("-----------------FICHA-----------------")

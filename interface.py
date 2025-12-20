@@ -6,7 +6,7 @@ def menu():
         print("Fazer ficha (1): ")
         print("Carregar ficha (2)")
         print("Sair (0)")
-        opc = verificar_digito("Escolhe ai: ")
+        opc = verificar_digito("Escolha: ")
         
         if opc>3 or opc<0:
             print("\nDigite apenas numeros validos\n")
@@ -26,7 +26,7 @@ def menu():
                     ficha.fazerFicha()
                     
                 case 2:
-                    caminho=input("Digite o nome da fica,tal qual, Não coloque o .json: ")
+                    caminho=input("Digite o nome da ficha,tal qual, Não coloque o .json: ")
                     caminho_feito=f"{caminho}.json"
                     ficha=carregar_ficha(caminho=caminho_feito)
                     print("Ficha carregada")
