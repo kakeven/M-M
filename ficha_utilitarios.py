@@ -53,7 +53,7 @@ def simplificar_pericia(ficha):
     nomePericia=escolher_da_lista(ficha.pericias_oficiais)
     if(validar_tudo(nomePericia,ficha.pericias_oficiais)):
         habilidade=ver_pericia(ficha,nomePericia)
-        pontosInvestidos = int(input("Digite quantos pontos vai investir na pericia: \n"))
+        pontosInvestidos = verificar_digito("Digite quantos pontos vai investir na pericia: \n")
         ficha.adicionarPericia(nomePericia=nomePericia,habilidade=habilidade,pontosInvs=pontosInvestidos)
     else:
         print("Pericia invalida!")
@@ -61,7 +61,7 @@ def simplificar_pericia(ficha):
 def simplificar_habilidade(ficha):              
     nomeHabilidade=escolher_da_lista(ficha.habilidades_oficiais)
     if(validar_tudo(nomeHabilidade,ficha.habilidades_oficiais)):
-        pontosInvestidos=int(input("digite quantas graduações vai investir na habilidade: \n"))
+        pontosInvestidos=verificar_digito("digite quantas graduações vai investir na habilidade: \n")
         ficha.adicionarHabilidades(nomeHabilidade=nomeHabilidade,gra=pontosInvestidos)
     else:
         print("\nHabilidade invalida!")
@@ -70,7 +70,7 @@ def simplificar_vantagem(ficha):
     print("Vantagens são normalmente compras únicas,então apenas é necessário 1 ponto, porém algumas podem ter nivel, atente-se!\n")
     nomeVantagem=escolher_da_lista(ficha.vantagens_oficiais)
     if(validar_tudo(nomeVantagem,ficha.vantagens_oficiais)):
-        pontosInvestidos=int(input("Digite quantos pontos vai investir: \n"))
+        pontosInvestidos=verificar_digito("Digite quantos pontos vai investir: \n")
         ficha.adicionarVantagem(nomeVantagem=nomeVantagem,graduacao=pontosInvestidos)
     else:
         print("\nVantagem invalida!")
@@ -97,15 +97,15 @@ def simplificar_componente(ficha):
         if isinstance(custo, (int, float)):
             nomeComponente = input("Nome do componente: ")
             efeito=efeito_escolhido
-            graduacao = int(input("Graduação: "))
+            graduacao = verificar_digito("Graduação: ")
             custo_base=custo
             
         else:
             # Agora coleta os dados do componente
             nomeComponente = input("Nome do componente: ")
             efeito=efeito_escolhido
-            graduacao = int(input("Graduação: "))
-            custo_base = int(input("Custo base: "))
+            graduacao = verificar_digito("Graduação: ")
+            custo_base = verificar_digito("Custo base: ")
             
         
             
