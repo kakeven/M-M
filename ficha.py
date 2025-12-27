@@ -169,9 +169,6 @@ class Ficha:
                     "valor": valor
                 }
                     
-                    from pprint import pprint
-                    pprint(componente)
-                    
                     return 
 
     def adicionarExtrasPoderes(self,poder,efeito_extra,valor):

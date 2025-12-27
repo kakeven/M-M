@@ -239,8 +239,8 @@ def simplificar_extraPoder(ficha):
     extra_poder = ["afeta outros","descritor variavel","efeito alternativo","ligado"]
     
     #mostra e escolhe o efeito
-    listar_atributos(extra_poder)
-    print("Somente esses efeitos podem ser aplicados a todo o conjunto poder\n")
+    
+    print("\nSomente esses efeitos podem ser aplicados a todo o conjunto poder\n")
     efeito_extra = escolher_da_lista(extra_poder)
 
     #pegar objeto extra
@@ -268,7 +268,7 @@ def simplificar_extraPoder(ficha):
     diferenca = novo_custo - antigo_custo
     if ficha.pontosDisponiveis < diferenca and diferenca >0:
         print("Você nao possui pontos suficientes")
-
+    print(f"Você ganhou {diferenca*-1} pontos, efeito: {efeito_extra} no poder: {p['nome']} ")
     ficha.adicionarExtrasPoderes(p,efeito_extra,valor)
     ficha.pontosDisponiveis -= diferenca
 
@@ -346,7 +346,7 @@ def simplificar_falhaPoderes(ficha):
     falhas_variaveis=["acao aumentada","alcance reduzido","ativacao","efeito colateral","removivel"]
 
     #mostra e escolhe o efeito
-    listar_atributos(falhas_variaveis)
+    
     print("Somente esses efeitos podem ser aplicados a todo o conjunto poder\n")
     efeito_extra = escolher_da_lista(falhas_variaveis)
 
@@ -392,7 +392,7 @@ def simplificar_falhaPoderes(ficha):
     diferenca = novo_custo - antigo_custo
     if ficha.pontosDisponiveis < diferenca and diferenca >0:
         print("Você nao possui pontos suficientes")
-
+    print(f"Você ganhou {diferenca*-1} pontos, efeito: {efeito_extra} no poder: {p['nome']} ")
     ficha.adicionarFalhasPoderes(p,efeito_extra,valor)
     ficha.pontosDisponiveis -= diferenca
 
