@@ -1,4 +1,6 @@
+# Versão 1.0 lançada nas release
 # Projeto de ficha — Mutantes & Malfeitores (3ª edição)
+
 
 Projeto de criação de fichas para o RPG **Mutantes & Malfeitores 3ª edição**.
 
