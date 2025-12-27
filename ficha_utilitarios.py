@@ -153,7 +153,7 @@ def calcular_custosPoderes(poder):
         graduacao = componente["graduacao"]
         )
     
-        #teste de comit
+        #teste de  comittta awdaowdioeifpeuif
         componente["custo_total"] = custo
         custo_total += custo
     return custo_total
