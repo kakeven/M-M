@@ -1,0 +1,9 @@
+{
+    "np": 10,
+    "nomeJogador": "",
+    "nomePersonagem": "",
+    "pontosDisponiveis": 150,
+    "total": 150,
+    "poderes": [],
+    "habilidades": {
+        "forca": 

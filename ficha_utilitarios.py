@@ -139,9 +139,17 @@ def ver_pericia(ficha,nomePericia):
         pericias_por_habilidade[nomePericia],0
     )
 
-def calcular_custosComponente(custo_base,graduacao,mod_g,mod_f):
-    custo_total=(custo_base+mod_g) * graduacao + mod_f
-    return custo_total
+def calcular_custosComponente(custo_base,graduacao,mod_g,mod_f,inicio=0,fim=0):
+    
+    grad_aplicada = max(0, min(fim, graduacao) - inicio + 1)
+    grad_normal = graduacao - grad_aplicada
+
+    custo_normal = custo_base * grad_normal
+    custo_modificado = (custo_base + mod_g) * grad_aplicada
+
+    return custo_normal + custo_modificado + mod_f
+
+
 
 def calcular_custosPoderes(poder):
     custo_total=0
@@ -151,6 +159,7 @@ def calcular_custosPoderes(poder):
         mod_g=componente["mod_por_graduacao"],
         mod_f=componente["mod_fixo"],
         graduacao = componente["graduacao"]
+        
         )
     
         
@@ -214,14 +223,32 @@ def simplificar_extraComponente(ficha):
         mod_f+=valor
         componente["mod_fixo"]=mod_f
     
-    custoDepois=calcular_custosComponente(custo_base=custobase,graduacao=graduacao,mod_g=mod_g,mod_f=mod_f)
-    
-    
-    resultado= custoDepois - custo_antes
-    componente["custo_total"]=custoDepois
-    
-    ficha.adicionarExtrasComponentes(componente_nome,efeito_extra,valor,tipo)
-    ficha.pontosDisponiveis -= resultado
+    intervalo = verificar_digito("Será aplicado a todas as graduações: 1(Sim) 2(Não)")
+
+    if intervalo ==1:
+        custoDepois=calcular_custosComponente(custo_base=custobase,graduacao=graduacao,mod_g=mod_g,mod_f=mod_f)
+        
+        
+        resultado= custoDepois - custo_antes
+        componente["custo_total"]=custoDepois
+        
+        ficha.adicionarExtrasComponentes(componente_nome,efeito_extra,valor,tipo)
+        ficha.pontosDisponiveis -= resultado
+
+    if intervalo == 2:
+        print("digite o inicio e o fim a seguir, Ex: voo 10, inicio 7, fim 10, o personagem irá ficar cansado ao voar nesse intervalo ")
+        inicio = verificar_digito("Inicio: ")
+        fim = verificar_digito("Fim: ")
+        
+        custoDepois=calcular_custosComponente(custo_base=custobase,graduacao=graduacao,mod_g=mod_g,mod_f=mod_f,inicio=inicio,fim=fim)
+        
+        
+        resultado= custoDepois - custo_antes
+        componente["custo_total"]=custoDepois
+        
+        ficha.adicionarExtrasComponentes(componente_nome,efeito_extra,valor,tipo)
+        ficha.pontosDisponiveis -= resultado    
+
     
 def simplificar_extraPoder(ficha):
     
@@ -411,7 +438,7 @@ def mostrar_ficha_atual(ficha):
     print(f"Nome do jogador: {ficha.nomeJogador}")
     print(f"Nome do personagem: {ficha.nomePersonagem}")
     print(f"Nivel de poder(NP): {ficha.np} | pontos disponiveis: {ficha.pontosDisponiveis}")
-    print("\n")
+    print()
     print(f"""  HABILIDADES: 
     
         Força: {ficha.habilidades["forca"]}

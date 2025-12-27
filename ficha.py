@@ -3,6 +3,43 @@ from poderes import efeitos_poderes_dicionario,efeitos_poderes_lista,vantagens,p
 from ficha_utilitarios import( simplificar_pericia, simplificar_habilidade,
 simplificar_vantagem, simplificar_componente,simplificar_extraComponente,verificar_digito,simplificar_extraPoder,simplificar_falhaComponente,simplificar_falhaPoderes,mostrar_ficha_atual)
 
+class Habilidade:
+    
+    def __init__(self,nome,graduacao):
+        self.graduacao =  graduacao
+        self.nome = nome
+        
+    
+    def custo(self,gra):
+        custo = 2
+        return gra* custo    
+
+class Pericia:
+    def __init__(self,nome,valor):
+        self.nome=nome
+        self.graduacao = valor * 2
+
+    @property
+    def custo(self):
+        return self.graduacao//2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Ficha:
     def __init__(self,np,nomeJogador,nomePersonagem):
         
@@ -14,16 +51,17 @@ class Ficha:
         self.nomePersonagem=nomePersonagem
 
         self.poderes=[]
-        self.habilidades={
-            "forca": 0,
-            "agilidade": 0,
-            "destreza": 0,
-            "luta": 0,
-            "intelecto": 0,
-            "prontidao": 0,
-            "presenca": 0,
-            "vigor":0
+        self.habilidades = {
+           "forca": Habilidade('forca',0),
+            "agilidade": Habilidade('agilidade',0),
+            "destreza": Habilidade('destreza',0),
+            "luta": Habilidade('luta',0),
+            "intelecto": Habilidade('intelecto',0),
+            "prontidao": Habilidade('prontidao',0),
+            "presenca": Habilidade('presenca',0),
+            "vigor":Habilidade('vigor',0)
         }
+        
         self.pericias=[]
         self.vantagens=[]
         self.poderes_lista= efeitos_poderes_lista
@@ -105,29 +143,16 @@ class Ficha:
         print("poder adicionado")
 
     def adicionarHabilidades(self,nomeHabilidade,gra):
-        custo_graduacao = 2
-        custo_total = custo_graduacao * gra
         
-        
-        if custo_total> self.pontosDisponiveis:
-            print(f"Pontos excedentes, você possui: {self.pontosDisponiveis} e quer gastar:{custo_total}")
+        habilidade=self.habilidades[nomeHabilidade] 
+        custo=habilidade.custo(gra)
+        if custo>self.pontosDisponiveis:
+            print("Pontos insuficiente")
             return
-        else:
-            self.pontosDisponiveis -= custo_total
-            habilidade = {
-                "nome":nomeHabilidade,
-                "pontosGastos":custo_total,
-                "habilidade": gra
-            }
-            self.habilidades[nomeHabilidade] += gra
-
-            #Re calcular pericia
-
-            for p in self.pericias:
-                habilidade_base = pericias_por_habilidade[p["nome"]]
-                if habilidade_base == nomeHabilidade:
-                    p["bonus"] = p["graduação"] + self.habilidades[nomeHabilidade]
-            print(f"Você possui: {self.pontosDisponiveis}")
+        
+        self.pontosDisponiveis -= custo
+        habilidade.graduacao +=gra
+        print(f"Você possui: {self.pontosDisponiveis}")
 
     def adicionarPericia(self,nomePericia,habilidade,pontosInvs):
             grad=2
@@ -158,7 +183,7 @@ class Ficha:
             print(f"Graduações: {graduacoes}, Bônus total: {bonus}, Custo: {pontosInvs}")
             print(f"Pontos restantes: {self.pontosDisponiveis}\n")
 
-    def adicionarExtrasComponentes(self,nomeComponente,efeito_extra,valor,tipo):
+    def adicionarExtrasComponentes(self,nomeComponente,efeito_extra,valor,tipo,inicio=None,fim=None):
         #pegar o componente escolhido
         for poder in self.poderes:
             for componente in poder["componentes"]:
@@ -166,8 +191,10 @@ class Ficha:
                     
                     componente["extras"][efeito_extra] = {
                     "tipo": tipo,
-                    "valor": valor
-                }
+                    "valor": valor,
+                    "inicio":inicio,
+                    "fim":fim
+                    }
                     
                     from pprint import pprint
                     pprint(componente)
