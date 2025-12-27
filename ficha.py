@@ -59,42 +59,44 @@ class Ficha:
         self.vantagens.append(vantagem)
         print(f"pontos disponiveis: {self.pontosDisponiveis}")
 
-    def adicionarComponente(self, nomeComponente, efeito, graduacao, custo_base):
-             # ex: [-1]
+    #Função não mais utilizada
+    # def adicionarComponente(self, nomeComponente, efeito, graduacao, custo_base):
+    
+    #     #FUNÇÃO NAO POSSUI MAIS USO
 
-        # custo por graduação já modificado
-        custo_grad_final = custo_base 
+    #     # custo por graduação já modificado
+    #     custo_grad_final = custo_base 
 
-        if custo_grad_final < 1:
-            print("O custo final por graduação não pode ser menor que 1.")
-            return
+    #     if custo_grad_final < 1:
+    #         print("O custo final por graduação não pode ser menor que 1.")
+    #         return
 
-        custo_total = graduacao * custo_grad_final
+    #     custo_total = graduacao * custo_grad_final
 
-        if custo_total > self.pontosDisponiveis:
-            print(f"Custo excedido. Você tem {self.pontosDisponiveis} pontos.")
-            return
+    #     if custo_total > self.pontosDisponiveis:
+    #         print(f"Custo excedido. Você tem {self.pontosDisponiveis} pontos.")
+    #         return
 
-        # garante que existe um poder criado
-        if not self.poderes:
-            print("Nenhum poder criado. Use adicionarPoder primeiro.")
-            return
+    #     # garante que existe um poder criado
+    #     if not self.poderes:
+    #         print("Nenhum poder criado. Use adicionarPoder primeiro.")
+    #         return
 
-        componente = {
-            "nome": nomeComponente,
-            "efeito": efeito,
-            "graduacao": graduacao,
-            "custo_base": custo_base,
-            "extras": {},
-            "falhas": {},
-            "custo_total": custo_total
-        }
+    #     componente = {
+    #         "nome": nomeComponente,
+    #         "efeito": efeito,
+    #         "graduacao": graduacao,
+    #         "custo_base": custo_base,
+    #         "extras": {},
+    #         "falhas": {},
+    #         "custo_total": custo_total
+    #     }
 
-        self.poderes[-1]["componentes"].append(componente)
-        self.pontosDisponiveis -= custo_total
+    #     self.poderes[-1]["componentes"].append(componente)
+    #     self.pontosDisponiveis -= custo_total
 
-        print(f"Componente {nomeComponente} adicionado!")
-        print(f"Graduação: {graduacao}, Custo total: {custo_total}")
+    #     print(f"Componente {nomeComponente} adicionado!")
+    #     print(f"Graduação: {graduacao}, Custo total: {custo_total}")
         
     def adicionarPoder(self,nomePoder):
         poder = {
@@ -168,10 +170,6 @@ class Ficha:
                     "tipo": tipo,
                     "valor": valor
                 }
-                    
-                    from pprint import pprint
-                    pprint(componente)
-                    
                     return 
 
     def adicionarExtrasPoderes(self,poder,efeito_extra,valor):

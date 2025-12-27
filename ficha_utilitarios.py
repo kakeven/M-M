@@ -153,7 +153,7 @@ def calcular_custosPoderes(poder):
         graduacao = componente["graduacao"]
         )
     
-        #teste de  comittta awdaowdioeifpeuif
+        
         componente["custo_total"] = custo
         custo_total += custo
     return custo_total
@@ -268,7 +268,7 @@ def simplificar_extraPoder(ficha):
     diferenca = novo_custo - antigo_custo
     if ficha.pontosDisponiveis < diferenca and diferenca >0:
         print("Você nao possui pontos suficientes")
-
+        return
     ficha.adicionarExtrasPoderes(p,efeito_extra,valor)
     ficha.pontosDisponiveis -= diferenca
 
@@ -392,7 +392,7 @@ def simplificar_falhaPoderes(ficha):
     diferenca = novo_custo - antigo_custo
     if ficha.pontosDisponiveis < diferenca and diferenca >0:
         print("Você nao possui pontos suficientes")
-
+        return
     ficha.adicionarFalhasPoderes(p,efeito_extra,valor)
     ficha.pontosDisponiveis -= diferenca
 
@@ -403,7 +403,7 @@ def verificar_digito(mensagem):
         if variavel.isdigit():
             return int(variavel)
        
-        print("\nDigite apenas numeros cara, não é tao dificil")
+        print("\nDigite apenas números válidos.")
 
 def mostrar_ficha_atual(ficha):
 
@@ -442,7 +442,29 @@ def mostrar_ficha_atual(ficha):
     print("\n   PODERES: ")
 
     if ficha.poderes:
-        listar_poderes(ficha.poderes) 
+        for poder in ficha.poderes:
+            print(f"\n🧬 Poder: {poder['nome']}")
+
+            if poder.get("falhas"):
+                print(f"  Falhas do poder: {poder['falhas']}")
+
+            for componente in poder["componentes"]:
+                print(f"""
+        ▶ Componente: {componente['nome']}
+            Efeito: {componente['efeito']}
+            Graduação: {componente['graduacao']}
+            Custo total: {componente['custo_total']}
+                """)
+
+                if componente["extras"]:
+                    print(f"    Extras: {list(componente['extras'].keys())}")
+
+                if componente["falhas"]:
+                    print(f"    Falhas: {list(componente['falhas'].keys())}")
+
+
+
+
     else:
         print("Nenhum poder adquirido")
     

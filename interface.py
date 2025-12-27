@@ -33,10 +33,8 @@ def menu():
                     ficha.fazerFicha()
 
                 case 0:
-                    exit()
+                    return
         
-
-menu()
 
 
 

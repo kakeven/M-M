@@ -1,3 +1,2 @@
 from interface import *
-
 menu()
