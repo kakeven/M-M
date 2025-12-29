@@ -149,8 +149,6 @@ def calcular_custosComponente(custo_base,graduacao,mod_g,mod_f,inicio=0,fim=0):
 
     return custo_normal + custo_modificado + mod_f
 
-
-
 def calcular_custosPoderes(poder):
     custo_total=0
 
@@ -248,7 +246,6 @@ def simplificar_extraComponente(ficha):
         
         ficha.adicionarExtrasComponentes(componente_nome,efeito_extra,valor,tipo)
         ficha.pontosDisponiveis -= resultado    
-
     
 def simplificar_extraPoder(ficha):
     

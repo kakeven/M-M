@@ -1,5 +1,7 @@
 import json
+
 def salvar(ficha,arquivo="ficha.json"):
+    
     dados = {
         "np": ficha.np,
         "nomeJogador": ficha.nomeJogador,
@@ -14,7 +16,6 @@ def salvar(ficha,arquivo="ficha.json"):
     with open(arquivo, "w", encoding="utf-8") as f:
         json.dump(dados, f, indent=4, ensure_ascii=False)
     print("Ficha salva!")
-
 
 def carregar_ficha(caminho):
     with open(caminho, "r", encoding="utf-8") as f:
