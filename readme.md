@@ -1,4 +1,4 @@
-# Versão 1.0 lançada nas release
+# Versão 1.1 lançada nas release
 # Projeto de ficha — Mutantes & Malfeitores (3ª edição)
 
 
